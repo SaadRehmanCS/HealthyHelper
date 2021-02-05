@@ -5,7 +5,7 @@
 The development of this application has been inspired by a personal need that I have had for a while. 
 I enjoy staying fit and feel that having a great diet is just as important as having a good workout routine. This app enables anyone 
 interested in tracking *exactly* what food/drink 
-goes into their bodies throughout the entire day by logging in food information that includes things like amount of carbs, protein, fat, etc. 
+goes into their bodies throughout the entire day to log in food information that includes things like amount of carbohydratess, protein, fat, etc. 
 The dynamic information logging process then integrates this entry into the daily goal/limit. 
 
 This helps users achieve peace of mind when worrying about if eating another 
