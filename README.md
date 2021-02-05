@@ -15,4 +15,16 @@ Additional features include:
 - Let the app calculate BMI values to give you a better idea of your current fitness.
 - Log food information for *specific* times of the day to track, plan, and meal prep more precisely. 
 
+## User stories
+- As a user, I want to be able to add/remove a food item to the list of 
+food items consumed daily.
+- As a user, I want to be able to add/remove any amount of water drank 
+throughout the day.
+- As a user, I want to be able to see how many calories I need to consume 
+in the day, to hit my target.
+- As a user, I want to be able to influence the program to show me 
+personalized nutrition information.
+- As a user, I want to be able to calculate my BMI, and 
+then have the program recommend a diet plan to take on.
+
 
