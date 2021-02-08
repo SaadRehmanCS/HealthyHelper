@@ -2,10 +2,23 @@ package model;
 
 public class MealType {
 
-    private double lunch;
-    private double breakfast;
-    private double dinner;
-    private double snack;
+
+    private String mealType;
+
+    public MealType(String mealType) {
+
+        switch (mealType) {
+            case "lunch": addLunch();
+            break;
+            case "breakfast": addBreakfast();
+            break;
+            case "dinner": addDinner();
+            break;
+            case "snack": addSnack();
+            break;
+        }
+
+    }
 
     public void addLunch(){}
 
@@ -14,6 +27,8 @@ public class MealType {
     public void addDinner(){}
 
     public void addSnack(){}
+
+    public void getMealType() {}
 
 
 

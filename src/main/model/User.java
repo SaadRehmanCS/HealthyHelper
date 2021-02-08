@@ -8,30 +8,34 @@ public class User {
     private List<Food> foodLog;
     private double calorieTarget;
     private String selectedDietPlan;
-    private List<Water> waterLog;
+    private Water waterLog;
     private List<MealType> mealTypeLog;
+    private CalorieTarget target;
 
 
     public User() {
         foodLog = new ArrayList<>();
-        waterLog = new ArrayList<>();
-        calorieTarget = getCalorieTarget(selectedDietPlan);
+        waterLog = new Water();
+        calorieTarget = target.getCalorieTarget();
         mealTypeLog = new ArrayList<>();
     }
 
+    //adds mealType list inside the method
     public void addFood(String name, double calories, String mealType) {}
-
-    public double getCalorieTarget(String dietPlan) {
-        return 0;
-    }
-
-    public void updateCalorieTarget(){}
 
     public void foodRecommendation(String dietPlan){}
 
-    public void drinkWater(){}
+    public void drinkWater() {
+        waterLog.incrementWater();
+    }
 
-    public void drinkWater(int cups){}
+    public void drinkWater(int cups) {
+        for (int i = 0; i < cups; i++) {
+            waterLog.incrementWater();
+        }
+    }
+
+
 
 
 }
