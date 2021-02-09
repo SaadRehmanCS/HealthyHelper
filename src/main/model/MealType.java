@@ -8,28 +8,41 @@ public class MealType {
     public MealType(String mealType) {
 
         switch (mealType) {
-            case "lunch": addLunch();
-            break;
-            case "breakfast": addBreakfast();
-            break;
-            case "dinner": addDinner();
-            break;
-            case "snack": addSnack();
-            break;
+            case "lunch":
+                addLunch();
+                break;
+            case "breakfast":
+                addBreakfast();
+                break;
+            case "dinner":
+                addDinner();
+                break;
+            case "snack":
+                addSnack();
+                break;
         }
 
     }
 
-    public void addLunch(){}
+    public void addLunch() {
+        mealType = "lunch";
+    }
 
-    public void addBreakfast(){}
+    public void addBreakfast() {
+        mealType = "breakfast";
+    }
 
-    public void addDinner(){}
+    public void addDinner() {
+        mealType = "dinner";
+    }
 
-    public void addSnack(){}
+    public void addSnack() {
+        mealType = "snack";
+    }
 
-    public void getMealType() {}
-
+    public String getMealType() {
+        return mealType;
+    }
 
 
 }

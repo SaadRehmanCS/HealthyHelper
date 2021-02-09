@@ -6,24 +6,21 @@ import java.util.List;
 public class User {
 
     private List<Food> foodLog;
-    private double calorieTarget;
-    private String selectedDietPlan;
     private Water waterLog;
     private List<MealType> mealTypeLog;
-    private CalorieTarget target;
-
 
     public User() {
         foodLog = new ArrayList<>();
         waterLog = new Water();
-        calorieTarget = target.getCalorieTarget();
         mealTypeLog = new ArrayList<>();
     }
 
-    //adds mealType list inside the method
-    public void addFood(String name, double calories, String mealType) {}
+    public void addFood(Food food) {
+        foodLog.add(food);
+        mealTypeLog.add(new MealType(food.getMealType()));
+    }
 
-    public void foodRecommendation(String dietPlan){}
+    public void foodRecommendation(){}
 
     public void drinkWater() {
         waterLog.incrementWater();

@@ -16,4 +16,8 @@ public class Food {
         return totalCalories;
     }
 
+    public String getMealType() {
+        return mealType;
+    }
+
 }

@@ -3,8 +3,6 @@ package ui;
 
 public class Main {
     public static void main(String[] args) {
-        DisplayInfo runProgram = new DisplayInfo();
-        runProgram.beginProgram();
-
+        new RunProgram();
     }
 }
