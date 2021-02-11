@@ -17,7 +17,7 @@ public class MealType {
             case "dinner":
                 addDinner();
                 break;
-            case "snack":
+            default:
                 addSnack();
                 break;
         }

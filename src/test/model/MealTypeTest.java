@@ -30,7 +30,7 @@ public class MealTypeTest {
 
     @Test
     public void testSnack() {
-        mealType = new MealType("snack");
+        mealType = new MealType("");
         assertEquals(mealType.getMealType(), "snack");
     }
 
