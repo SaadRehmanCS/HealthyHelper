@@ -3,10 +3,10 @@ package model;
 public class CalorieTarget {
 
     private int calorieTarget;
-    private int caloriesBurned;
+    private int caloriesConsumed;
 
     public CalorieTarget(DietPlan plan) {
-        caloriesBurned = 0;
+        caloriesConsumed = 0;
         if (plan.getSelectedPlan().equals("bulk")) {
             calorieTarget = (int)plan.calculateBMI() * 125;
         } else if (plan.getSelectedPlan().equals("maintain")) {
@@ -18,15 +18,15 @@ public class CalorieTarget {
 
     public void updateCalorieTarget(Food food) {
         calorieTarget -= food.getTotalCalories();
-        caloriesBurned += food.getTotalCalories();
+        caloriesConsumed += food.getTotalCalories();
     }
 
     public int getCalorieTarget() {
         return calorieTarget;
     }
 
-    public int getCaloriesBurned() {
-        return caloriesBurned;
+    public int getCaloriesConsumed() {
+        return caloriesConsumed;
     }
 
 }

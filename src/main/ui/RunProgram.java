@@ -9,16 +9,14 @@ public class RunProgram extends DisplayInfo {
 
         boolean userQuit = false;
 
-        Scanner input = new Scanner(System.in);
-
         while (!userQuit) {
             calorieTargetDisplay();
             loggingDisplay();
-            System.out.println("Would you like to continue? 1/0");
-            int finalInput = input.nextInt();
-            if (finalInput == 0) {
+            if (RUN_PROGRAM == 0) {
                 userQuit = true;
             }
         }
+        System.out.println("Thank you!");
+        System.out.println("Come back tomorrow to keep tracking fitness goals and more!");
     }
 }

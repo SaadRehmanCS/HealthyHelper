@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class DisplayInfo {
 
+    protected static int RUN_PROGRAM = 1;
+
     private DietPlan dietPlan;
     private CalorieTarget calorieTarget;
     private User user;
@@ -54,12 +56,13 @@ public class DisplayInfo {
     public void calorieTargetDisplay() {
         System.out.println("Your remaining calorie target to hit today is "
                 + calorieTarget.getCalorieTarget() + " kcal");
-        System.out.println("Calories burned: " + calorieTarget.getCaloriesBurned());
+        System.out.println("Calories burned: " + calorieTarget.getCaloriesConsumed());
     }
 
     public void loggingDisplay() {
         System.out.println("1 ---> Add a food item consumed");
         System.out.println("2 ---> Add an amount of water consumed");
+        System.out.println("\n0 ---> Quit the program! :(");
         loggingEntry();
     }
 
@@ -73,32 +76,24 @@ public class DisplayInfo {
             case 2:
                 waterEntry();
                 break;
+            case 0:
+                RUN_PROGRAM = 0;
         }
     }
 
     public void foodEntry() {
-        user.foodRecommendation();
+        //user.foodRecommendation();
+        System.out.println(user.foodDisplay());
         System.out.println("Enter the name of the food:");
-        String foodName = input.nextLine().trim().toLowerCase();
         input.nextLine();
+        String foodName = input.nextLine().trim().toLowerCase();
         System.out.println("Enter the total calories contained in this item");
         int foodCalories = input.nextInt();
         System.out.println("1 ---> breakfast\n2 ---> lunch\n3 ---> dinner"
                 + "\n4 ---> snack");
         int intMealType = input.nextInt();
-        String mealType;
 
-        switch (intMealType) {
-            case 1: mealType = "breakfast";
-            break;
-            case 2: mealType = "lunch";
-            break;
-            case 3: mealType = "dinner";
-            break;
-            default: mealType = "snack";
-        }
-
-        Food food = new Food(foodName, foodCalories, mealType);
+        Food food = new Food(foodName, foodCalories, user.getMealTypeFromNums(intMealType));
         user.addFood(food);
         calorieTarget.updateCalorieTarget(food);
     }

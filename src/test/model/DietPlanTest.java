@@ -39,4 +39,10 @@ class DietPlanTest {
         assertEquals(planUnder.dietPlanRecommendation(), "bulk");
         assertEquals(planNormal.dietPlanRecommendation(), "maintain");
     }
+
+    @Test
+    public void testGetSelectedPlan() {
+        planOver.setDietPlanUserSelection("cut");
+        assertEquals(planOver.getSelectedPlan(), "cut");
+    }
 }

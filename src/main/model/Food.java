@@ -6,6 +6,7 @@ public class Food {
     private int totalCalories;
     private String mealType;
 
+
     public Food(String name, int totalCalories, String mealType) {
         this.name = name;
         this.totalCalories = totalCalories;
@@ -18,6 +19,10 @@ public class Food {
 
     public String getMealType() {
         return mealType;
+    }
+
+    public String getFoodName() {
+        return name;
     }
 
 }

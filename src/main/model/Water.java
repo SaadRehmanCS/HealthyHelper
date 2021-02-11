@@ -11,7 +11,7 @@ public class Water {
     }
 
     public void incrementWater() {
-        if (getAmountConsumed() < 20) {
+        if (getAmountConsumed() < DAILY_REQUIREMENT) {
             amountConsumed++;
         }
     }
@@ -20,8 +20,11 @@ public class Water {
         return amountConsumed;
     }
 
-    public int getCurrentRequirement() {
-        return 0;
+    public void setAmountConsumed(int cups) {
+        amountConsumed += cups;
     }
+
+    //public int getCurrentRequirement() { return 0;}
+
 
 }
