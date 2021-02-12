@@ -16,6 +16,7 @@ public class CalorietargetTest {
         plan = new DietPlan(20, 80);
         plan.setDietPlanUserSelection("bulk");
         target = new CalorieTarget(plan);
+
     }
 
     @Test
