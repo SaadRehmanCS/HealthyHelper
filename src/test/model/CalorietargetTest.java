@@ -24,11 +24,9 @@ public class CalorietargetTest {
         plan.setDietPlanUserSelection("bulk");
         assertEquals(target.getCalorieTarget(), (int) plan.calculateBMI() * 125);
 
-
         plan.setDietPlanUserSelection("cut");
         target = new CalorieTarget(plan);
         assertEquals(target.getCalorieTarget(), (int) plan.calculateBMI() * 95);
-
 
         plan.setDietPlanUserSelection("maintain");
         target = new CalorieTarget(plan);
