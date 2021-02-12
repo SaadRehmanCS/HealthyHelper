@@ -13,7 +13,6 @@ public class CalorietargetTest {
     @BeforeEach
     public void setup() {
 
-        //overweight height and weight values
         plan = new DietPlan(20, 80);
         plan.setDietPlanUserSelection("bulk");
         target = new CalorieTarget(plan);
