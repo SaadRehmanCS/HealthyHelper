@@ -1,18 +1,25 @@
 package model;
 
+//this class is used to provide personalized information
+//to the user, having been provided their current body type, and
+// finally determine an appropriate diet plan for them to take on.
 public class DietPlan {
 
-    //centimetres
     private double height;
-    //kilograms
     private double weight;
     private String selectedPlan;
 
+    //REQUIRES: height must be in cm, weight must be in kg
+    //MODIFIES: this
+    //EFFECTS: sets the users height and weight
     public DietPlan(double height, double weight) {
         this.height = height;
         this.weight = weight;
     }
 
+    //EFFECTS: calculates the BMI, then formats it
+    //     so there are only 3 significant figures,
+    //     and returns the double value
     public double calculateBMI() {
 
         double bmi = weight / Math.pow((height / 100), 2);
@@ -21,6 +28,9 @@ public class DietPlan {
         return Double.parseDouble(bmiString);
     }
 
+    //EFFECTS: based on the calculated BMI, it
+    //     determines the body type classification
+    //     given a set of ranges the BMI can fall under
     public String bmiAssessment() {
 
         if (calculateBMI() < 18.5) {
@@ -34,6 +44,8 @@ public class DietPlan {
         }
     }
 
+    //EFFECTS: generates a diet plan recommendation
+    //     based on the BMI assessment
     public String dietPlanRecommendation() {
 
         if (bmiAssessment().equals("underweight")) {
@@ -45,6 +57,8 @@ public class DietPlan {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets this to the user-selected diet plan
     public void setDietPlanUserSelection(String userInput) {
         selectedPlan = userInput;
     }

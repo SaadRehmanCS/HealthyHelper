@@ -54,9 +54,16 @@ public class DisplayInfo {
     }
 
     public void calorieTargetDisplay() {
-        System.out.println("Your remaining calorie target to hit today is "
-                + calorieTarget.getCalorieTarget() + " kcal");
-        System.out.println("Calories burned: " + calorieTarget.getCaloriesConsumed());
+        if (calorieTarget.getCalorieTarget() > 0) {
+            System.out.println("Your remaining calorie target to hit today is "
+                    + calorieTarget.getCalorieTarget() + " kcal");
+        } else {
+            System.out.println("You have hit your calorie target for today!\nAdditional "
+                    + "calories consumed today: "
+                    + (calorieTarget.getCaloriesConsumed() - calorieTarget.getOriginalCalorieTarget()));
+
+        }
+        System.out.println("Calories consumed: " + calorieTarget.getCaloriesConsumed());
     }
 
     public void loggingDisplay() {

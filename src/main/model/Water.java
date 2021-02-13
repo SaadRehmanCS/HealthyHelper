@@ -1,6 +1,6 @@
 package model;
 
-
+//this class constructs a water object
 public class Water {
 
     private static final int DAILY_REQUIREMENT = 8;
@@ -23,8 +23,5 @@ public class Water {
     public void setAmountConsumed(int cups) {
         amountConsumed += cups;
     }
-
-    //public int getCurrentRequirement() { return 0;}
-
 
 }

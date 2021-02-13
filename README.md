@@ -16,14 +16,15 @@ Additional features include:
 - Log food information for *specific* times of the day to track, plan, and meal prep more precisely. 
 
 ## User stories
-- As a user, I want to be able to add/remove a food item to the list of 
+- As a user, I want to be able to add a food item to the list of 
 food items consumed daily.
-- As a user, I want to be able to add/remove any amount of water drank 
+- As a user, I want to be able to add any amount of water drank 
 throughout the day.
 - As a user, I want to be able to see how many calories I need to consume 
 in the day, to hit my target.
-- As a user, I want to be able to influence the program to show me 
-personalized nutrition information.
+- As a user, I want to be able to see a well formatted list of all the 
+food items I have consumed throughout the day, printed in front of me 
+by the program.
 - As a user, I want to be able to calculate my BMI, and 
 then have the program recommend a diet plan to take on.
 
