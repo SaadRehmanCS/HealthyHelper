@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 //when the program has enough information from the
@@ -16,9 +17,9 @@ public class User {
     //MODIFIES: this
     //EFFECTS: constructs lists for food logging, and a water object
     public User() {
-        foodLog = new ArrayList<>();
+        foodLog = new LinkedList<>();
         waterLog = new Water();
-        mealTypeLog = new ArrayList<>();
+        mealTypeLog = new LinkedList<>();
     }
 
     //MODIFIES: this
@@ -26,7 +27,7 @@ public class User {
     //      meal type to the meal type list
     public void addFood(Food food) {
         foodLog.add(food);
-        mealTypeLog.add(new MealType(food.getMealType()));
+        mealTypeLog.add(food.getMealType());
     }
 
     public List<Food> getFoodLog() {
@@ -59,17 +60,17 @@ public class User {
 
     //EFFECTS: returns a string meal type from a
     //     parameter that contains the int form of the meal type
-    public String getMealTypeFromNums(int intMealType) {
+    public MealType getMealTypeFromNums(int intMealType) {
 
         switch (intMealType) {
             case 1:
-                return "breakfast";
+                return MealType.BREAKFAST;
             case 2:
-                return "lunch";
+                return MealType.LUNCH;
             case 3:
-                return "dinner";
+                return MealType.DINNER;
             default:
-                return "snack";
+                return MealType.SNACK;
         }
     }
 

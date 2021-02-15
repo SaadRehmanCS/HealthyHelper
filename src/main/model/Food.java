@@ -6,11 +6,11 @@ public class Food {
 
     private String name;
     private int totalCalories;
-    private String mealType;
+    private MealType mealType;
 
     //MODIFIES: this
     //EFFECTS: sets this to the values given in the parameter
-    public Food(String name, int totalCalories, String mealType) {
+    public Food(String name, int totalCalories, MealType mealType) {
         this.name = name;
         this.totalCalories = totalCalories;
         this.mealType = mealType;
@@ -20,7 +20,7 @@ public class Food {
         return totalCalories;
     }
 
-    public String getMealType() {
+    public MealType getMealType() {
         return mealType;
     }
 
