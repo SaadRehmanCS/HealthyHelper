@@ -22,6 +22,10 @@ public class Water {
         }
     }
 
+    public int getDailyRequirement() {
+        return DAILY_REQUIREMENT;
+    }
+
     public int getAmountConsumed() {
         return amountConsumed;
     }

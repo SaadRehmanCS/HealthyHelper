@@ -13,6 +13,7 @@ public class User {
     private List<Food> foodLog;
     private Water waterLog;
     private List<MealType> mealTypeLog;
+    private Sleep sleep;
 
     //MODIFIES: this
     //EFFECTS: constructs lists for food logging, and a water object
@@ -20,6 +21,7 @@ public class User {
         foodLog = new LinkedList<>();
         waterLog = new Water();
         mealTypeLog = new LinkedList<>();
+        sleep = new Sleep();
     }
 
     //MODIFIES: this
@@ -34,7 +36,11 @@ public class User {
         return foodLog;
     }
 
-    public int getWaterLogSize() {
+    public Water getWater() {
+        return waterLog;
+    }
+
+    public int getWaterSize() {
         return waterLog.getAmountConsumed();
     }
 
@@ -50,6 +56,7 @@ public class User {
         waterLog.incrementWater();
     }
 
+    //REQUIRES: parameter must be cups > 0
     //MODIFIES: this
     //EFFECTS: increments water log by the amount specified in the parameter
     public void drinkWater(int cups) {
@@ -91,5 +98,8 @@ public class User {
         return printIntro + print + "\n";
     }
 
+    public Sleep getSleep() {
+        return sleep;
+    }
 
 }

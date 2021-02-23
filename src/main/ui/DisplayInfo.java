@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class DisplayInfo {
 
     protected static int RUN_PROGRAM = 1;
+    private static int sleepEntryCounter = 0;
 
     private DietPlan dietPlan;
     private CalorieTarget calorieTarget;
@@ -18,12 +19,12 @@ public class DisplayInfo {
     Scanner input = new Scanner(System.in);
 
     public DisplayInfo() {
+        user = new User();
         beginProgram();
         dietPlanDecider();
     }
 
     public void beginProgram() {
-        user = new User();
 
         System.out.println("Welcome to HealthyHelper! the application "
                 + " that can help you keep your fitness goals on track!\n"
@@ -53,7 +54,7 @@ public class DisplayInfo {
 
     }
 
-    public void calorieTargetDisplay() {
+    public void mainMenuCalorieDisplay() {
         if (calorieTarget.getCalorieTarget() > 0) {
             System.out.println("Your remaining calorie target to hit today is "
                     + calorieTarget.getCalorieTarget() + " kcal");
@@ -66,9 +67,24 @@ public class DisplayInfo {
         System.out.println("Calories consumed: " + calorieTarget.getCaloriesConsumed());
     }
 
+    public void mainMenuWaterDisplay() {
+
+        if (user.getWaterSize() < user.getWater().getDailyRequirement()) {
+            int remainingRequirement = user.getWater().getDailyRequirement() - user.getWaterSize();
+            System.out.println("You have consumed " + user.getWaterSize() + " cups of water"
+                    + " today. You are " + remainingRequirement + " cups away from consuming a healthy amount"
+                    + " of water today.");
+        } else {
+            System.out.println("Hooray! you have consumed a healthy amount of water for today. You may"
+                    + " continue to drink more as you like!");
+        }
+        System.out.println("\n");
+    }
+
     public void loggingDisplay() {
         System.out.println("1 ---> Add a food item consumed");
         System.out.println("2 ---> Add an amount of water consumed");
+        System.out.println("3 ---> Track your sleep habits");
         System.out.println("\n0 ---> Quit the program! :(");
         loggingEntry();
     }
@@ -82,6 +98,10 @@ public class DisplayInfo {
                 break;
             case 2:
                 waterEntry();
+                break;
+            case 3:
+                sleepEntryCounter++;
+                sleepEntry();
                 break;
             case 0:
                 RUN_PROGRAM = 0;
@@ -115,6 +135,16 @@ public class DisplayInfo {
             user.drinkWater(waterInput);
         }
 
+    }
+
+    public void sleepEntry() {
+        if (sleepEntryCounter == 1) {
+            System.out.print("Enter the number of hours you were able to sleep last night: ");
+            double sleepInput = input.nextDouble();
+            user.getSleep().addSleepTime(sleepInput);
+        }
+
+        System.out.println(user.getSleep().sleepAssessment() + "\n");
     }
 
 

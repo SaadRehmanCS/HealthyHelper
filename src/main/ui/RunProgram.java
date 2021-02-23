@@ -1,7 +1,5 @@
 package ui;
 
-import java.util.Scanner;
-
 public class RunProgram extends DisplayInfo {
 
     public RunProgram() {
@@ -10,7 +8,8 @@ public class RunProgram extends DisplayInfo {
         boolean userQuit = false;
 
         while (!userQuit) {
-            calorieTargetDisplay();
+            mainMenuCalorieDisplay();
+            mainMenuWaterDisplay();
             loggingDisplay();
             if (RUN_PROGRAM == 0) {
                 userQuit = true;

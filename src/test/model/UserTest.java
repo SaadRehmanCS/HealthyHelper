@@ -26,13 +26,13 @@ public class UserTest {
     @Test
     public void testDrinkWaterOnce() {
         user.drinkWater();
-        assertEquals(user.getWaterLogSize(), 1);
+        assertEquals(user.getWaterSize(), 1);
     }
 
     @Test
     public void testDrinkWaterMultiple() {
         user.drinkWater(5);
-        assertEquals(user.getWaterLogSize(), 5);
+        assertEquals(user.getWaterSize(), 5);
     }
 
     @Test
