@@ -30,18 +30,17 @@ public class RunProgram extends DisplayInfo {
 
         Scanner scanner = null;
         try {
-            File file = new File("./././facts.txt");
+            File file = new File("facts.txt");
             scanner = new Scanner(file);
+            ArrayList<String> facts = new ArrayList<>();
+            while (scanner.hasNextLine()) {
+                facts.add(scanner.nextLine());
+            }
+            return "Random fact of the day: " + facts.get((int)(facts.size() * Math.random())) + "\n";
+
         } catch (FileNotFoundException e) {
             System.out.println("File does not exist");
         }
-
-        ArrayList<String> facts = new ArrayList<>();
-        while (scanner.hasNextLine()) {
-            facts.add(scanner.nextLine());
-
-        }
-
-        return "Random fact of the day: " + facts.get((int)(facts.size() * Math.random())) + "\n";
+        return null;
     }
 }

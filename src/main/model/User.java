@@ -91,8 +91,8 @@ public class User {
         }
         String print = "";
         for (Food food : getFoodLog()) {
-            print += (++i) + ") " + String.format("%-16s%-12d%-10s\n",
-                    food.getFoodName(), food.getTotalCalories(), food.getMealType());
+            print += (++i) + ") " + String.format("%-16s%-12d%-14s%-16s\n",
+                    food.getFoodName(), food.getTotalCalories(), food.getMealType(), food.getTimeOfConsumption());
         }
 
         return printIntro + print + "\n";
