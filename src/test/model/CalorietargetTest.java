@@ -24,26 +24,25 @@ public class CalorietargetTest {
         plan.setDietPlanUserSelection("bulk");
         assertEquals(target.getCalorieTarget(), (int) plan.calculateBMI() * 125);
 
-
         plan.setDietPlanUserSelection("cut");
         target = new CalorieTarget(plan);
         assertEquals(target.getCalorieTarget(), (int) plan.calculateBMI() * 95);
 
-
         plan.setDietPlanUserSelection("maintain");
         target = new CalorieTarget(plan);
         assertEquals(target.getCalorieTarget(), (int) plan.calculateBMI() * 110);
+        assertEquals(target.getOriginalCalorieTarget(), target.getCalorieTarget());
     }
 
     @Test
     public void testUpdateCalorieTarget() {
-        Food food = new Food("Pasta", 500, "lunch");
+        Food food = new Food("Pasta", 500, MealType.LUNCH);
 
         int previousTarget = target.getCalorieTarget();
         int previousConsumed = target.getCaloriesConsumed();
 
         target.updateCalorieTarget(food);
-        assertEquals(target.getCalorieTarget(), previousTarget -500);
+        assertEquals(target.getCalorieTarget(), previousTarget - 500);
         assertEquals(target.getCaloriesConsumed(), previousConsumed + 500);
 
     }

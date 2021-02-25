@@ -1,49 +1,10 @@
 package model;
 
-public class MealType {
+//this enumeration contains constants that
+//represent the different meal types
+public enum MealType {
 
-
-    private String mealType;
-
-    public MealType(String mealType) {
-
-        switch (mealType) {
-            case "lunch":
-                addLunch();
-                break;
-            case "breakfast":
-                addBreakfast();
-                break;
-            case "dinner":
-                addDinner();
-                break;
-            default:
-                addSnack();
-                break;
-        }
-
-    }
-
-    public void addLunch() {
-        mealType = "lunch";
-    }
-
-    public void addBreakfast() {
-        mealType = "breakfast";
-    }
-
-    public void addDinner() {
-        mealType = "dinner";
-    }
-
-    public void addSnack() {
-        mealType = "snack";
-    }
-
-    public String getMealType() {
-        return mealType;
-    }
-
-
-
+    BREAKFAST, LUNCH, DINNER, SNACK
 }
+
+

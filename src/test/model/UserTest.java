@@ -17,7 +17,7 @@ public class UserTest {
 
     @Test
     public void testAddFood() {
-        Food food = new Food("Food", 500, "lunch");
+        Food food = new Food("Food", 500, MealType.LUNCH);
 
         user.addFood(food);
         assertEquals(user.getFoodSize(), 1);
@@ -26,21 +26,21 @@ public class UserTest {
     @Test
     public void testDrinkWaterOnce() {
         user.drinkWater();
-        assertEquals(user.getWaterLogSize(), 1);
+        assertEquals(user.getWaterSize(), 1);
     }
 
     @Test
     public void testDrinkWaterMultiple() {
         user.drinkWater(5);
-        assertEquals(user.getWaterLogSize(), 5);
+        assertEquals(user.getWaterSize(), 5);
     }
 
     @Test
     public void testGetMealTypeFromNums() {
-        assertEquals(user.getMealTypeFromNums(1), "breakfast");
-        assertEquals(user.getMealTypeFromNums(2), "lunch");
-        assertEquals(user.getMealTypeFromNums(3), "dinner");
-        assertEquals(user.getMealTypeFromNums(4), "snack");
+        assertEquals(user.getMealTypeFromNums(1), MealType.BREAKFAST);
+        assertEquals(user.getMealTypeFromNums(2), MealType.LUNCH);
+        assertEquals(user.getMealTypeFromNums(3), MealType.DINNER);
+        assertEquals(user.getMealTypeFromNums(4), MealType.SNACK);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class UserTest {
 
     @Test
     public void testFoodDisplay() {
-        Food food = new Food("Food", 500, "lunch");
+        Food food = new Food("Food", 500, MealType.LUNCH);
         user.addFood(food);
 
         String printIntro = "Food items consumed today: \n   Name            Calories    Meal\n";

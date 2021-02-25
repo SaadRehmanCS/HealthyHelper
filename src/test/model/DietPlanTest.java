@@ -10,6 +10,7 @@ class DietPlanTest {
     DietPlan planOver;
     DietPlan planUnder;
     DietPlan planNormal;
+
     @BeforeEach
     public void setup() {
         planOver = new DietPlan(175, 85);
