@@ -1,12 +1,15 @@
 package model;
 
+import model.json.Writable;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Formatter;
 
 //this object type stores a food item with three attributes,
 //into a list for logging purposes. The list can be created in any other class
-public class Food {
+public class Food implements Writable {
 
     private String name;
     private int totalCalories;
@@ -41,4 +44,13 @@ public class Food {
         return name;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("total calories", totalCalories);
+        json.put("meal type", mealType);
+        json.put("time of consumption", timeOfConsumption);
+        return json;
+    }
 }

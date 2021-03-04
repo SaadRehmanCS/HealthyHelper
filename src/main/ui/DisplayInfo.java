@@ -4,22 +4,31 @@ import model.CalorieTarget;
 import model.DietPlan;
 import model.Food;
 import model.User;
+import model.json.JsonReader;
+import model.json.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class DisplayInfo {
 
+    private static final String JSON_STORE = "./data/user.json";
     protected static int RUN_PROGRAM = 1;
     private static int sleepEntryCounter = 0;
 
     private DietPlan dietPlan;
     private CalorieTarget calorieTarget;
     private User user;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
-    Scanner input = new Scanner(System.in);
+    Scanner input;
 
     public DisplayInfo() {
         user = new User();
+        input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         beginProgram();
         dietPlanDecider();
     }
@@ -86,6 +95,11 @@ public class DisplayInfo {
         System.out.println("2 ---> Add an amount of water consumed");
         System.out.println("3 ---> Track your sleep habits");
         System.out.println("\n0 ---> Quit the program! :(");
+        System.out.println("6 to save file");
+        int inp = input.nextInt();
+        if (inp == 6) {
+            saveUser();
+        }
         loggingEntry();
     }
 
@@ -147,6 +161,17 @@ public class DisplayInfo {
         System.out.println(user.getSleep().sleepAssessment() + "\n");
     }
 
+    private void saveUser() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(user);
+            jsonWriter.close();
+            System.out.println("File was saved to " + JSON_STORE);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save file");
+        }
+    }
 
 }
 

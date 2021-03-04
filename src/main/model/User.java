@@ -1,5 +1,9 @@
 package model;
 
+import model.json.Writable;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +12,7 @@ import java.util.List;
 //user, an object of this type is instantiated and creates
 //lists that store any information that the user logs for the rest of the day,
 //including food, water, and meal type of food
-public class User {
+public class User implements Writable {
 
     private List<Food> foodLog;
     private Water waterLog;
@@ -100,6 +104,24 @@ public class User {
 
     public Sleep getSleep() {
         return sleep;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("food", foodLogToJson());
+        return json;
+
+    }
+
+    private JSONArray foodLogToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Food food: foodLog) {
+            jsonArray.put(food.toJson());
+        }
+
+        return jsonArray;
     }
 
 }
