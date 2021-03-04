@@ -3,9 +3,11 @@
 ## A brief introduction
 
 The development of this application has been inspired by a personal need that I have had for a while. 
-I enjoy staying fit and feel that having a great diet is just as important as having a good workout routine. This app enables anyone 
+I enjoy staying fit and feel that having a great diet is just as important as having a good workout 
+routine. This app enables anyone 
 interested in tracking *exactly* what food/drink 
-goes into their bodies throughout the entire day to log in food information that includes things like amount of carbohydratess, protein, fat, etc. 
+goes into their bodies throughout the entire day to log in food information that includes 
+things like amount of carbohydratess, protein, fat, etc. 
 The dynamic information logging process then integrates this entry into the daily goal/limit. 
 
 This helps users achieve peace of mind when worrying about if eating another 
@@ -27,5 +29,8 @@ food items I have consumed throughout the day, printed in front of me
 by the program.
 - As a user, I want to be able to calculate my BMI, and 
 then have the program recommend a diet plan to take on.
-
+- As a user, I want to be able to store my daily food and water consumption 
+information to file.
+- As a user, I want to be able to look at the progress I've been 
+making over a few days by looking at the history of my daily goals being met 
 
