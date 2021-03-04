@@ -1,5 +1,8 @@
 package model;
 
+import model.json.Writable;
+import org.json.JSONObject;
+
 //this class constructs a water object, to which more water can
 //be added, as long as it is below the daily requirement
 public class Water {

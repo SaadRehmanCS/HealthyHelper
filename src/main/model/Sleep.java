@@ -11,6 +11,9 @@ public class Sleep {
         sleepTime = 0;
     }
 
+    public double getSleepTime() {
+        return sleepTime;
+    }
     //REQUIRES: sleep time is nonnegative and less than 12
     public void addSleepTime(double sleepTime) {
         this.sleepTime += sleepTime;

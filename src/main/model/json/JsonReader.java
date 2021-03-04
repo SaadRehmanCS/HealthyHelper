@@ -37,11 +37,22 @@ public class JsonReader {
     }
 
     private User parseUser(JSONObject jsonObject) {
-        //String name = jsonObject.getString("name");
         User user = new User();
         addFoodLog(user, jsonObject);
+        addWater(user, jsonObject);
+        addSleep(user, jsonObject);
         return user;
 
+    }
+
+    private void addSleep(User user, JSONObject jsonObject) {
+        double sleepTime = jsonObject.getDouble("sleep time");
+        user.addSleep(sleepTime);
+    }
+
+    private void addWater(User user, JSONObject jsonObject) {
+        int amountConsumed = jsonObject.getInt("water consumed");
+        user.drinkWater(amountConsumed);
     }
 
     private void addFoodLog(User user, JSONObject jsonObject) {
@@ -56,8 +67,8 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         int totalCalories = jsonObject.getInt("total calories");
         MealType mealType = MealType.valueOf(jsonObject.getString("meal type"));
-        //String timeOfConsumption = jsonObject.getString("time of consumption");
-        Food food = new Food(name, totalCalories, mealType);
+        String timeOfConsumption = jsonObject.getString("time of consumption");
+        Food food = new Food(name, totalCalories, mealType, timeOfConsumption);
         user.addFood(food);
     }
 

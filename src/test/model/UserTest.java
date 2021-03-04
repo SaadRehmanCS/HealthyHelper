@@ -17,7 +17,7 @@ public class UserTest {
 
     @Test
     public void testAddFood() {
-        Food food = new Food("Food", 500, MealType.LUNCH);
+        Food food = new Food("Food", 500, MealType.LUNCH, "");
 
         user.addFood(food);
         assertEquals(user.getFoodSize(), 1);
@@ -50,7 +50,7 @@ public class UserTest {
 
     @Test
     public void testFoodDisplay() {
-        Food food = new Food("Food", 500, MealType.LUNCH);
+        Food food = new Food("Food", 500, MealType.LUNCH, "");
         user.addFood(food);
 
         String printIntro = "Food items consumed today: \n   Name            Calories    Meal\n";

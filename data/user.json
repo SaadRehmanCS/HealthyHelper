@@ -1,14 +1,5 @@
-{"food": [
-    {
-        "name": "pasta",
-        "time of consumption": "9:23 PM  Thu, Mar 4",
-        "meal type": "LUNCH",
-        "total calories": 342
-    },
-    {
-        "name": "fded",
-        "time of consumption": "9:24 PM  Thu, Mar 4",
-        "meal type": "SNACK",
-        "total calories": 231
-    }
-]}
+{
+    "water consumed": 0,
+    "sleep time": 2,
+    "food": []
+}

@@ -54,6 +54,10 @@ public class User implements Writable {
 
     //public void foodRecommendation() {}
 
+    public void addSleep(double hours) {
+        sleep.addSleepTime(hours);
+    }
+
     //MODIFIES: this
     //EFFECTS: increments water log by 1
     public void drinkWater() {
@@ -106,10 +110,16 @@ public class User implements Writable {
         return sleep;
     }
 
+    public double getSleepTime() {
+        return sleep.getSleepTime();
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("food", foodLogToJson());
+        json.put("water consumed", waterLog.getAmountConsumed());
+        json.put("sleep time", getSleepTime());
         return json;
 
     }

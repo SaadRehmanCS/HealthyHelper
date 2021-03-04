@@ -22,6 +22,7 @@ public class RunProgram extends DisplayInfo {
             }
         }
 
+        saveUser();
         System.out.println("Thank you!");
         System.out.println("Come back tomorrow to keep tracking fitness goals and more!");
     }

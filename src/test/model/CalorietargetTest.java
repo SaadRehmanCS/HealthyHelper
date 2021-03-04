@@ -36,7 +36,7 @@ public class CalorietargetTest {
 
     @Test
     public void testUpdateCalorieTarget() {
-        Food food = new Food("Pasta", 500, MealType.LUNCH);
+        Food food = new Food("Pasta", 500, MealType.LUNCH, "");
 
         int previousTarget = target.getCalorieTarget();
         int previousConsumed = target.getCaloriesConsumed();

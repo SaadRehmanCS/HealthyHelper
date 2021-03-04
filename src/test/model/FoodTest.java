@@ -11,7 +11,7 @@ public class FoodTest {
 
     @BeforeEach
     public void setup() {
-        food = new Food("name" , 100, MealType.LUNCH);
+        food = new Food("name" , 100, MealType.LUNCH, "");
     }
 
     @Test

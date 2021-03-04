@@ -8,6 +8,9 @@ import model.json.JsonReader;
 import model.json.JsonWriter;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class DisplayInfo {
@@ -29,6 +32,7 @@ public class DisplayInfo {
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+        //loadUser();
         beginProgram();
         dietPlanDecider();
     }
@@ -95,11 +99,6 @@ public class DisplayInfo {
         System.out.println("2 ---> Add an amount of water consumed");
         System.out.println("3 ---> Track your sleep habits");
         System.out.println("\n0 ---> Quit the program! :(");
-        System.out.println("6 to save file");
-        int inp = input.nextInt();
-        if (inp == 6) {
-            saveUser();
-        }
         loggingEntry();
     }
 
@@ -133,8 +132,10 @@ public class DisplayInfo {
         System.out.println("1 ---> breakfast\n2 ---> lunch\n3 ---> dinner"
                 + "\n4 ---> snack");
         int intMealType = input.nextInt();
-
-        Food food = new Food(foodName, foodCalories, user.getMealTypeFromNums(intMealType));
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("h:mm a  EEE, MMM d");
+        String timeOfConsumption = formatter.format(date);
+        Food food = new Food(foodName, foodCalories, user.getMealTypeFromNums(intMealType), timeOfConsumption);
         user.addFood(food);
         calorieTarget.updateCalorieTarget(food);
     }
@@ -161,7 +162,7 @@ public class DisplayInfo {
         System.out.println(user.getSleep().sleepAssessment() + "\n");
     }
 
-    private void saveUser() {
+    protected void saveUser() {
         try {
             jsonWriter.open();
             jsonWriter.write(user);
@@ -170,6 +171,14 @@ public class DisplayInfo {
 
         } catch (FileNotFoundException e) {
             System.out.println("Unable to save file");
+        }
+    }
+
+    private void loadUser() {
+        try {
+            user = jsonReader.read();
+        } catch (IOException e) {
+            System.out.println("unable to load data from " + JSON_STORE);
         }
     }
 
