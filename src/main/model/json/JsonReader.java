@@ -41,8 +41,19 @@ public class JsonReader {
         addFoodLog(user, jsonObject);
         addWater(user, jsonObject);
         addSleep(user, jsonObject);
+        addCalorieTarget(user, jsonObject);
         return user;
 
+    }
+
+    private void addCalorieTarget(User user, JSONObject jsonObject) {
+        JSONObject json = jsonObject.getJSONObject("calorie target");
+        int remaining = json.getInt("remaining target");
+        int consumed = json.getInt("calories consumed");
+        int original = json.getInt("original target");
+        user.setOriginalTarget(original);
+        user.setCaloriesConsumed(consumed);
+        user.setCalorieTarget(remaining);
     }
 
     private void addSleep(User user, JSONObject jsonObject) {

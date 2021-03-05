@@ -1,5 +1,23 @@
 {
-    "water consumed": 0,
-    "sleep time": 2,
-    "food": []
+    "water consumed": 5,
+    "sleep time": 7,
+    "calorie target": {
+        "calories consumed": 655,
+        "remaining target": 1625,
+        "original target": 2280
+    },
+    "food": [
+        {
+            "name": "rice",
+            "time of consumption": "1:17 AM  Sat, Mar 6",
+            "meal type": "BREAKFAST",
+            "total calories": 532
+        },
+        {
+            "name": "linguini",
+            "time of consumption": "1:18 AM  Sat, Mar 6",
+            "meal type": "SNACK",
+            "total calories": 123
+        }
+    ]
 }

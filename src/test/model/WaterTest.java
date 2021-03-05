@@ -11,15 +11,15 @@ public class WaterTest {
     @Test
     public void testIncrementWaterOverLimit() {
         water = new Water();
-        water.setAmountConsumed(60);
+        water.setCupsConsumed(60);
         water.incrementWater();
-        assertEquals(water.getAmountConsumed(), 60);
+        assertEquals(water.getCupsConsumed(), 60);
     }
 
     @Test
     public void testIncrementWaterUnderLimit() {
         water = new Water();
         water.incrementWater();
-        assertEquals(water.getAmountConsumed(), 1);
+        assertEquals(water.getCupsConsumed(), 1);
     }
 }

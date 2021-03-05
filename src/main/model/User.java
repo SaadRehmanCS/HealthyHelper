@@ -4,7 +4,6 @@ import model.json.Writable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class User implements Writable {
     private Water waterLog;
     private List<MealType> mealTypeLog;
     private Sleep sleep;
+    private CalorieTarget calorieTarget;
 
     //MODIFIES: this
     //EFFECTS: constructs lists for food logging, and a water object
@@ -26,7 +26,41 @@ public class User implements Writable {
         waterLog = new Water();
         mealTypeLog = new LinkedList<>();
         sleep = new Sleep();
+        calorieTarget = new CalorieTarget();
     }
+
+    public void setOriginalTarget(DietPlan plan) {
+        calorieTarget.setOriginalTarget(plan);
+    }
+
+    public void setOriginalTarget(int target) {
+        calorieTarget.setOriginalTarget(target);
+    }
+
+    public void setCalorieTarget(int remaining) {
+        calorieTarget.setCalorieTarget(remaining);
+    }
+
+    public void setCaloriesConsumed(int consumed) {
+        calorieTarget.setCaloriesConsumed(consumed);
+    }
+
+    public void updateCalorieTarget(Food food) {
+        calorieTarget.updateCalorieTarget(food);
+    }
+
+    public int getCalorieTarget() {
+        return calorieTarget.getCalorieTarget();
+    }
+
+    public int getCaloriesConsumed() {
+        return calorieTarget.getCaloriesConsumed();
+    }
+
+    public int getOriginalCalorieTarget() {
+        return calorieTarget.getOriginalCalorieTarget();
+    }
+
 
     //MODIFIES: this
     //EFFECTS: adds food to the food log list, and the
@@ -45,7 +79,7 @@ public class User implements Writable {
     }
 
     public int getWaterSize() {
-        return waterLog.getAmountConsumed();
+        return waterLog.getCupsConsumed();
     }
 
     public int getFoodSize() {
@@ -118,20 +152,41 @@ public class User implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("food", foodLogToJson());
-        json.put("water consumed", waterLog.getAmountConsumed());
+        json.put("water consumed", waterLog.getCupsConsumed());
         json.put("sleep time", getSleepTime());
+        json.put("calorie target", calorieTarget.toJson());
         return json;
 
     }
 
-    private JSONArray foodLogToJson() {
+    public JSONArray foodLogToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Food food: foodLog) {
+        for (Food food : foodLog) {
             jsonArray.put(food.toJson());
         }
 
         return jsonArray;
     }
+
+//scaffolding
+    //private JSONObject userToJson() {
+    //         JSONObject json = new JSONObject();
+    //      for (User user: Users) {
+    //        json.put("food", foodLogToJson());
+    //        json.put("water consumed", waterLog.getAmountConsumed());
+    //        json.put("sleep time", getSleepTime());
+    //      }
+    //  return json
+    // }
+
+    //scaffolding
+    //@Override
+    //    public JSONObject toJson() {
+    //        JSONObject json = new JSONObject();
+    //        json.put("user", user.userToJson());
+    //        return json;
+    //
+    //    }
 
 }

@@ -1,11 +1,11 @@
 package ui;
 
-import model.CalorieTarget;
 import model.DietPlan;
 import model.Food;
 import model.User;
 import model.json.JsonReader;
 import model.json.JsonWriter;
+import org.json.JSONException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+@SuppressWarnings("checkstyle:RightCurly")
 public class DisplayInfo {
 
     private static final String JSON_STORE = "./data/user.json";
@@ -20,21 +21,32 @@ public class DisplayInfo {
     private static int sleepEntryCounter = 0;
 
     private DietPlan dietPlan;
-    private CalorieTarget calorieTarget;
+    //private CalorieTarget calorieTarget;
     private User user;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    Scanner input;
+    private Scanner input;
 
     public DisplayInfo() {
         user = new User();
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        //loadUser();
-        beginProgram();
-        dietPlanDecider();
+        userSelection();
+    }
+
+    public void userSelection() {
+        System.out.println("Are you a new or returning user?");
+        System.out.println("Returning --> 1\nNew --> 0");
+        int in = input.nextInt();
+        if (in == 1) {
+            loadUser();
+        } else {
+            clearUserData();
+            beginProgram();
+            dietPlanDecider();
+        }
     }
 
     public void beginProgram() {
@@ -63,21 +75,21 @@ public class DisplayInfo {
         String chosenStrategy = (tempInt == 1 ? "bulk" : ((tempInt == 2) ? "cut" : "maintain"));
 
         dietPlan.setDietPlanUserSelection(chosenStrategy);
-        calorieTarget = new CalorieTarget(dietPlan);
+        user.setOriginalTarget(dietPlan);
 
     }
 
     public void mainMenuCalorieDisplay() {
-        if (calorieTarget.getCalorieTarget() > 0) {
+        if (user.getCalorieTarget() > 0) {
             System.out.println("Your remaining calorie target to hit today is "
-                    + calorieTarget.getCalorieTarget() + " kcal");
+                    + user.getCalorieTarget() + " kcal");
         } else {
             System.out.println("You have hit your calorie target for today!\nAdditional "
                     + "calories consumed today: "
-                    + (calorieTarget.getCaloriesConsumed() - calorieTarget.getOriginalCalorieTarget()));
+                    + (user.getCaloriesConsumed() - user.getOriginalCalorieTarget()));
 
         }
-        System.out.println("Calories consumed: " + calorieTarget.getCaloriesConsumed());
+        System.out.println("Calories consumed: " + user.getCaloriesConsumed());
     }
 
     public void mainMenuWaterDisplay() {
@@ -137,7 +149,7 @@ public class DisplayInfo {
         String timeOfConsumption = formatter.format(date);
         Food food = new Food(foodName, foodCalories, user.getMealTypeFromNums(intMealType), timeOfConsumption);
         user.addFood(food);
-        calorieTarget.updateCalorieTarget(food);
+        user.updateCalorieTarget(food);
     }
 
     public void waterEntry() {
@@ -174,11 +186,23 @@ public class DisplayInfo {
         }
     }
 
+    private void clearUserData() {
+        try {
+            jsonWriter.open();
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File does not exist");
+        }
+    }
+
     private void loadUser() {
         try {
             user = jsonReader.read();
         } catch (IOException e) {
             System.out.println("unable to load data from " + JSON_STORE);
+        } catch (JSONException e) {
+            System.out.println("File is empty");
+
         }
     }
 
