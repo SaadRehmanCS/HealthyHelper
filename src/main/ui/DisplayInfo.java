@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-@SuppressWarnings("checkstyle:RightCurly")
 public class DisplayInfo {
 
     private static final String JSON_STORE = "./data/user.json";
@@ -114,7 +113,7 @@ public class DisplayInfo {
             try {
                 int chosenStrategy = input.nextInt();
                 dietPlan.setDietPlanUserSelection(chosenStrategy);
-                user.setOriginalTarget(dietPlan);
+                user.getCalorieTarget().setOriginalTarget(dietPlan);
                 proceed = true;
             } catch (InvalidDietPlanException | ImpossibleBodyDimensionsException | InputMismatchException e) {
                 System.out.println(e);
@@ -124,16 +123,17 @@ public class DisplayInfo {
     }
 
     public void mainMenuCalorieDisplay() {
-        if (user.getCalorieTarget() > 0) {
+        if (user.getCalorieTarget().getCaloriesRemaining() > 0) {
             System.out.println("Your remaining calorie target to hit today is "
-                    + user.getCalorieTarget() + " kcal");
+                    + user.getCalorieTarget().getCaloriesRemaining() + " kcal");
         } else {
             System.out.println("You have hit your calorie target for today!\nAdditional "
                     + "calories consumed today: "
-                    + (user.getCaloriesConsumed() - user.getOriginalCalorieTarget()));
+                    + (user.getCalorieTarget().getCaloriesConsumed()
+                     - user.getCalorieTarget().getOriginalCalorieTarget()));
 
         }
-        System.out.println("Calories consumed: " + user.getCaloriesConsumed());
+        System.out.println("Calories consumed: " + user.getCalorieTarget().getCaloriesConsumed());
     }
 
     public void mainMenuWaterDisplay() {
@@ -211,7 +211,7 @@ public class DisplayInfo {
         String timeOfConsumption = formatter.format(date);
         Food food = new Food(foodName, foodCalories, user.getMealTypeFromNums(intMealType), timeOfConsumption);
         user.addFood(food);
-        user.updateCalorieTarget(food);
+        user.getCalorieTarget().updateCalorieTarget(food);
     }
 
     public void waterEntry() {

@@ -1,6 +1,5 @@
 package model;
 
-import model.exceptions.ImpossibleBodyDimensionsException;
 import model.json.Writable;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,45 +29,16 @@ public class User implements Writable {
         calorieTarget = new CalorieTarget();
     }
 
-    public void setOriginalTarget(DietPlan plan) throws ImpossibleBodyDimensionsException {
-        calorieTarget.setOriginalTarget(plan);
-    }
-
-    public void setOriginalTarget(int target) {
-        calorieTarget.setOriginalTarget(target);
-    }
-
-    public void setCalorieTarget(int remaining) {
-        calorieTarget.setCalorieTarget(remaining);
-    }
-
-    public void setCaloriesConsumed(int consumed) {
-        calorieTarget.setCaloriesConsumed(consumed);
-    }
-
-    public void updateCalorieTarget(Food food) {
-        calorieTarget.updateCalorieTarget(food);
-    }
-
-    public int getCalorieTarget() {
-        return calorieTarget.getCalorieTarget();
-    }
-
-    public int getCaloriesConsumed() {
-        return calorieTarget.getCaloriesConsumed();
-    }
-
-    public int getOriginalCalorieTarget() {
-        return calorieTarget.getOriginalCalorieTarget();
-    }
-
-
     //MODIFIES: this
     //EFFECTS: adds food to the food log list, and the
     //      meal type to the meal type list
     public void addFood(Food food) {
         foodLog.add(food);
         mealTypeLog.add(food.getMealType());
+    }
+
+    public CalorieTarget getCalorieTarget() {
+        return calorieTarget;
     }
 
     public List<Food> getFoodLog() {

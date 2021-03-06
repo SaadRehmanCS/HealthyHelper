@@ -51,9 +51,9 @@ public class JsonReader {
         int remaining = json.getInt("remaining target");
         int consumed = json.getInt("calories consumed");
         int original = json.getInt("original target");
-        user.setOriginalTarget(original);
-        user.setCaloriesConsumed(consumed);
-        user.setCalorieTarget(remaining);
+        user.getCalorieTarget().setOriginalTarget(original);
+        user.getCalorieTarget().setCaloriesConsumed(consumed);
+        user.getCalorieTarget().setCaloriesRemaining(remaining);
     }
 
     private void addSleep(User user, JSONObject jsonObject) {

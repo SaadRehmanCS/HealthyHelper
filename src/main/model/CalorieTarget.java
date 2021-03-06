@@ -9,7 +9,7 @@ import org.json.JSONObject;
 //anytime the user consumes food
 public class CalorieTarget {
 
-    private int calorieTarget;
+    private int caloriesRemaining;
     private int caloriesConsumed;
     private static int ORIGINAL_CALORIE_TARGET;
 
@@ -19,7 +19,7 @@ public class CalorieTarget {
     //     this target is assigned to the original target.
     public CalorieTarget() {
         caloriesConsumed = 0;
-        calorieTarget = 0;
+        caloriesRemaining = 0;
         ORIGINAL_CALORIE_TARGET = 0;
     }
 
@@ -27,8 +27,8 @@ public class CalorieTarget {
         caloriesConsumed = consumed;
     }
 
-    public void setCalorieTarget(int target) {
-        calorieTarget = target;
+    public void setCaloriesRemaining(int target) {
+        caloriesRemaining = target;
     }
 
     public void setOriginalTarget(int target) {
@@ -38,14 +38,14 @@ public class CalorieTarget {
     //REQUIRES: should only be called once, when deciding meal plan
     public void setOriginalTarget(DietPlan plan) throws ImpossibleBodyDimensionsException {
         if (plan.getSelectedPlan().equals("bulk")) {
-            calorieTarget = (int) plan.calculateBMI() * 125;
+            caloriesRemaining = (int) plan.calculateBMI() * 125;
         } else if (plan.getSelectedPlan().equals("maintain")) {
-            calorieTarget = (int) plan.calculateBMI() * 110;
+            caloriesRemaining = (int) plan.calculateBMI() * 110;
         } else {
-            calorieTarget = (int) plan.calculateBMI() * 95;
+            caloriesRemaining = (int) plan.calculateBMI() * 95;
         }
 
-        ORIGINAL_CALORIE_TARGET = calorieTarget;
+        ORIGINAL_CALORIE_TARGET = caloriesRemaining;
     }
 
     //MODIFIES: this
@@ -54,12 +54,12 @@ public class CalorieTarget {
     //     calories consumed is incremented
     //     accordingly
     public void updateCalorieTarget(Food food) {
-        calorieTarget -= food.getTotalCalories();
+        caloriesRemaining -= food.getTotalCalories();
         caloriesConsumed += food.getTotalCalories();
     }
 
-    public int getCalorieTarget() {
-        return calorieTarget;
+    public int getCaloriesRemaining() {
+        return caloriesRemaining;
     }
 
     public int getCaloriesConsumed() {
@@ -72,7 +72,7 @@ public class CalorieTarget {
 
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("remaining target", calorieTarget);
+        json.put("remaining target", caloriesRemaining);
         json.put("calories consumed", caloriesConsumed);
         json.put("original target", ORIGINAL_CALORIE_TARGET);
         return json;
