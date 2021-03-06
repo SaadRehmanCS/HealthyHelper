@@ -1,5 +1,6 @@
 package model;
 
+import model.exceptions.ImpossibleBodyDimensionsException;
 import org.json.JSONObject;
 
 //instantiating an object of this class type
@@ -30,8 +31,12 @@ public class CalorieTarget {
         calorieTarget = target;
     }
 
+    public void setOriginalTarget(int target) {
+        ORIGINAL_CALORIE_TARGET = target;
+    }
+
     //REQUIRES: should only be called once, when deciding meal plan
-    public void setOriginalTarget(DietPlan plan) {
+    public void setOriginalTarget(DietPlan plan) throws ImpossibleBodyDimensionsException {
         if (plan.getSelectedPlan().equals("bulk")) {
             calorieTarget = (int) plan.calculateBMI() * 125;
         } else if (plan.getSelectedPlan().equals("maintain")) {
@@ -41,10 +46,6 @@ public class CalorieTarget {
         }
 
         ORIGINAL_CALORIE_TARGET = calorieTarget;
-    }
-
-    public void setOriginalTarget(int target) {
-        ORIGINAL_CALORIE_TARGET = target;
     }
 
     //MODIFIES: this

@@ -1,5 +1,6 @@
 package model;
 
+import model.exceptions.ImpossibleBodyDimensionsException;
 import model.json.Writable;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,7 +30,7 @@ public class User implements Writable {
         calorieTarget = new CalorieTarget();
     }
 
-    public void setOriginalTarget(DietPlan plan) {
+    public void setOriginalTarget(DietPlan plan) throws ImpossibleBodyDimensionsException {
         calorieTarget.setOriginalTarget(plan);
     }
 

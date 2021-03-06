@@ -3,6 +3,8 @@ package ui;
 import model.DietPlan;
 import model.Food;
 import model.User;
+import model.exceptions.ImpossibleBodyDimensionsException;
+import model.exceptions.InvalidDietPlanException;
 import model.json.JsonReader;
 import model.json.JsonWriter;
 import org.json.JSONException;
@@ -11,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 @SuppressWarnings("checkstyle:RightCurly")
@@ -21,7 +24,6 @@ public class DisplayInfo {
     private static int sleepEntryCounter = 0;
 
     private DietPlan dietPlan;
-    //private CalorieTarget calorieTarget;
     private User user;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -33,13 +35,33 @@ public class DisplayInfo {
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        userSelection();
+
+        boolean proceed = false;
+        while (proceed == false) {
+            try {
+                userSelection();
+                proceed = true;
+            } catch (ArithmeticException e) {
+                System.out.println(e);
+                input.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println(e);
+                input.nextLine();
+            }
+        }
     }
 
     public void userSelection() {
         System.out.println("Are you a new or returning user?");
         System.out.println("Returning --> 1\nNew --> 0");
+
+
         int in = input.nextInt();
+
+        if (in != 0 && in != 1) {
+            throw new ArithmeticException("Enter either 1 or 0");
+        }
+
         if (in == 1) {
             loadUser();
         } else {
@@ -47,6 +69,7 @@ public class DisplayInfo {
             beginProgram();
             dietPlanDecider();
         }
+
     }
 
     public void beginProgram() {
@@ -54,29 +77,50 @@ public class DisplayInfo {
         System.out.println("Welcome to HealthyHelper! the application "
                 + " that can help you keep your fitness goals on track!\n"
                 + "Lets begin by entering your height and weight below.");
-        System.out.print("Height(cm): ");
-        double height = input.nextDouble();
-        System.out.print("Weight(kg): ");
-        double weight = input.nextDouble();
 
-        dietPlan = new DietPlan(height, weight);
+        boolean proceed = false;
+        while (proceed == false) {
+            try {
+                System.out.print("Height(cm): ");
+                double height = input.nextDouble();
+                System.out.print("Weight(kg): ");
+                double weight = input.nextDouble();
+                dietPlan = new DietPlan(height, weight);
+                proceed = true;
+
+            } catch (ImpossibleBodyDimensionsException e) {
+                System.out.println(e);
+                input.nextLine();
+            }
+        }
 
     }
 
-    public void dietPlanDecider() {
-        System.out.println(" Your BMI comes out to: " + dietPlan.calculateBMI()
-                + ".\n According to our estimates, you are classified as " + dietPlan.bmiAssessment()
-                + ".\n Based on this, we recommend that you choose the \"" + dietPlan.dietPlanRecommendation()
-                + "\" strategy to achieve the best results");
 
+    public void dietPlanDecider() {
+        try {
+            System.out.println(" Your BMI comes out to: " + dietPlan.calculateBMI()
+                    + ".\n According to our estimates, you are classified as " + dietPlan.bmiAssessment()
+                    + ".\n Based on this, we recommend that you choose the \"" + dietPlan.dietPlanRecommendation()
+                    + "\" strategy to achieve the best results");
+        } catch (ImpossibleBodyDimensionsException e) {
+            input.nextLine();
+            beginProgram();
+        }
         System.out.println("What strategy would you like to pursue?:\n"
                 + "1 ---> \"Bulk\"\n2 ---> \"Cut\"\n3 ---> \"Maintain\"");
-        int tempInt = input.nextInt();
-        String chosenStrategy = (tempInt == 1 ? "bulk" : ((tempInt == 2) ? "cut" : "maintain"));
-
-        dietPlan.setDietPlanUserSelection(chosenStrategy);
-        user.setOriginalTarget(dietPlan);
-
+        boolean proceed = false;
+        while (proceed == false) {
+            try {
+                int chosenStrategy = input.nextInt();
+                dietPlan.setDietPlanUserSelection(chosenStrategy);
+                user.setOriginalTarget(dietPlan);
+                proceed = true;
+            } catch (InvalidDietPlanException | ImpossibleBodyDimensionsException | InputMismatchException e) {
+                System.out.println(e);
+                input.nextLine();
+            }
+        }
     }
 
     public void mainMenuCalorieDisplay() {
@@ -115,9 +159,8 @@ public class DisplayInfo {
     }
 
     public void loggingEntry() {
-        int loggingInt = input.nextInt();
 
-        switch (loggingInt) {
+        switch (singleInputExceptionHandler()) {
             case 1:
                 foodEntry();
                 break;
@@ -130,7 +173,26 @@ public class DisplayInfo {
                 break;
             case 0:
                 RUN_PROGRAM = 0;
+                break;
+            default:
+                loggingDisplay();
         }
+    }
+
+    public int singleInputExceptionHandler() {
+        int in = 0;
+        boolean proceed = false;
+        while (!proceed) {
+            try {
+                in = input.nextInt();
+                proceed = true;
+            } catch (InputMismatchException e) {
+                System.out.println(e);
+                input.nextLine();
+            }
+        }
+
+        return in;
     }
 
     public void foodEntry() {

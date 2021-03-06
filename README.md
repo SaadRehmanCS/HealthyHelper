@@ -31,6 +31,5 @@ by the program.
 then have the program recommend a diet plan to take on.
 - As a user, I want to be able to store my daily food and water consumption 
 information to file.
-- As a user, I want to be able to look at the progress I've been 
-making over a few days by looking at the history of my daily goals being met 
-
+- As a user, I want to be able to login as a returning user with pre-existing
+ information, or as a new user with no pre-existing data records
