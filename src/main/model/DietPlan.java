@@ -31,7 +31,7 @@ public class DietPlan {
 
         double bmi = weight / Math.pow((height / 100), 2);
 
-        if (bmi > 40) {
+        if (bmi > 40 || bmi < 5) {
             throw new ImpossibleBodyDimensionsException();
         }
 

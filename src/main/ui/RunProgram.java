@@ -2,8 +2,8 @@ package ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class RunProgram extends DisplayInfo {
 
@@ -13,6 +13,7 @@ public class RunProgram extends DisplayInfo {
         boolean userQuit = false;
 
         while (!userQuit) {
+            beginNewDayProtocol(day);
             System.out.println(displayRandomFacts());
             mainMenuCalorieDisplay();
             mainMenuWaterDisplay();
@@ -25,6 +26,18 @@ public class RunProgram extends DisplayInfo {
         saveUser();
         System.out.println("Thank you!");
         System.out.println("Come back tomorrow to keep tracking fitness goals and more!");
+    }
+
+    public void beginNewDayProtocol(int declaredDay) {
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        int currentDay = calendar.get(Calendar.DATE);
+
+        if (currentDay != declaredDay) {
+            user.setAllFieldsToZero();
+            day = currentDay;
+        }
+
+
     }
 
     public String displayRandomFacts() {

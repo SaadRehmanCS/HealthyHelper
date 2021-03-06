@@ -1,4 +1,4 @@
-package model.json;
+package model.persistence;
 
 import model.User;
 import org.json.JSONObject;

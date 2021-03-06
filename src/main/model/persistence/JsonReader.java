@@ -1,10 +1,11 @@
-package model.json;
+package model.persistence;
 
 import model.Food;
 import model.MealType;
 import model.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import ui.DisplayInfo;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -40,7 +41,7 @@ public class JsonReader {
         User user = new User();
         addFoodLog(user, jsonObject);
         addWater(user, jsonObject);
-        addSleep(user, jsonObject);
+        addSleepAndTime(user, jsonObject);
         addCalorieTarget(user, jsonObject);
         return user;
 
@@ -56,9 +57,11 @@ public class JsonReader {
         user.getCalorieTarget().setCaloriesRemaining(remaining);
     }
 
-    private void addSleep(User user, JSONObject jsonObject) {
+    private void addSleepAndTime(User user, JSONObject jsonObject) {
         double sleepTime = jsonObject.getDouble("sleep time");
+        int day = jsonObject.getInt("day of the month");
         user.addSleep(sleepTime);
+        DisplayInfo.setDay(day);
     }
 
     private void addWater(User user, JSONObject jsonObject) {

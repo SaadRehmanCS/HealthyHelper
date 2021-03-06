@@ -5,25 +5,25 @@ import model.Food;
 import model.User;
 import model.exceptions.ImpossibleBodyDimensionsException;
 import model.exceptions.InvalidDietPlanException;
-import model.json.JsonReader;
-import model.json.JsonWriter;
+import model.persistence.JsonReader;
+import model.persistence.JsonWriter;
 import org.json.JSONException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class DisplayInfo {
 
+    protected static final Calendar CALENDER = Calendar.getInstance(TimeZone.getDefault());
     private static final String JSON_STORE = "./data/user.json";
     protected static int RUN_PROGRAM = 1;
     private static int sleepEntryCounter = 0;
+    protected static int day;
 
     private DietPlan dietPlan;
-    private User user;
+    protected User user;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -36,7 +36,7 @@ public class DisplayInfo {
         jsonReader = new JsonReader(JSON_STORE);
 
         boolean proceed = false;
-        while (proceed == false) {
+        while (!proceed) {
             try {
                 userSelection();
                 proceed = true;
@@ -65,6 +65,7 @@ public class DisplayInfo {
             loadUser();
         } else {
             clearUserData();
+            day = CALENDER.get(Calendar.DATE);
             beginProgram();
             dietPlanDecider();
         }
@@ -73,13 +74,12 @@ public class DisplayInfo {
 
     public void beginProgram() {
 
-        System.out.println("Welcome to HealthyHelper! the application "
-                + " that can help you keep your fitness goals on track!\n"
-                + "Lets begin by entering your height and weight below.");
-
         boolean proceed = false;
-        while (proceed == false) {
+        while (!proceed) {
             try {
+                System.out.println("Welcome to HealthyHelper! the application "
+                        + " that can help you keep your fitness goals on track!\n"
+                        + "Lets begin by entering your height and weight below.");
                 System.out.print("Height(cm): ");
                 double height = input.nextDouble();
                 System.out.print("Weight(kg): ");
@@ -87,7 +87,7 @@ public class DisplayInfo {
                 dietPlan = new DietPlan(height, weight);
                 proceed = true;
 
-            } catch (ImpossibleBodyDimensionsException e) {
+            } catch (InputMismatchException | ImpossibleBodyDimensionsException e) {
                 System.out.println(e);
                 input.nextLine();
             }
@@ -95,24 +95,32 @@ public class DisplayInfo {
 
     }
 
+    public void printBmiInfo() throws ImpossibleBodyDimensionsException {
+        System.out.println(" Your BMI comes out to: " + dietPlan.calculateBMI()
+                + ".\n According to our estimates, you are classified as " + dietPlan.bmiAssessment()
+                + ".\n Based on this, we recommend that you choose the \"" + dietPlan.dietPlanRecommendation()
+                + "\" strategy to achieve the best results");
+    }
 
     public void dietPlanDecider() {
-        try {
-            System.out.println(" Your BMI comes out to: " + dietPlan.calculateBMI()
-                    + ".\n According to our estimates, you are classified as " + dietPlan.bmiAssessment()
-                    + ".\n Based on this, we recommend that you choose the \"" + dietPlan.dietPlanRecommendation()
-                    + "\" strategy to achieve the best results");
-        } catch (ImpossibleBodyDimensionsException e) {
-            input.nextLine();
-            beginProgram();
-        }
-        System.out.println("What strategy would you like to pursue?:\n"
-                + "1 ---> \"Bulk\"\n2 ---> \"Cut\"\n3 ---> \"Maintain\"");
+
         boolean proceed = false;
-        while (proceed == false) {
+        while (!proceed) {
             try {
-                int chosenStrategy = input.nextInt();
-                dietPlan.setDietPlanUserSelection(chosenStrategy);
+                printBmiInfo();
+                proceed = true;
+
+            } catch (ImpossibleBodyDimensionsException e) {
+                System.out.println(e);
+                beginProgram();
+            }
+        }
+
+        System.out.println("What strategy do you choose?:\n1 ---> \"Bulk\"\n2 ---> \"Cut\"\n3 ---> \"Maintain\"");
+        proceed = false;
+        while (!proceed) {
+            try {
+                dietPlan.setDietPlanUserSelection(input.nextInt());
                 user.getCalorieTarget().setOriginalTarget(dietPlan);
                 proceed = true;
             } catch (InvalidDietPlanException | ImpossibleBodyDimensionsException | InputMismatchException e) {
@@ -130,7 +138,7 @@ public class DisplayInfo {
             System.out.println("You have hit your calorie target for today!\nAdditional "
                     + "calories consumed today: "
                     + (user.getCalorieTarget().getCaloriesConsumed()
-                     - user.getCalorieTarget().getOriginalCalorieTarget()));
+                    - user.getCalorieTarget().getOriginalCalorieTarget()));
 
         }
         System.out.println("Calories consumed: " + user.getCalorieTarget().getCaloriesConsumed());
@@ -138,9 +146,9 @@ public class DisplayInfo {
 
     public void mainMenuWaterDisplay() {
 
-        if (user.getWaterSize() < user.getWater().getDailyRequirement()) {
-            int remainingRequirement = user.getWater().getDailyRequirement() - user.getWaterSize();
-            System.out.println("You have consumed " + user.getWaterSize() + " cups of water"
+        if (user.getWater().getCupsConsumed() < user.getWater().getDailyRequirement()) {
+            int remainingRequirement = user.getWater().getDailyRequirement() - user.getWater().getCupsConsumed();
+            System.out.println("You have consumed " + user.getWater().getCupsConsumed() + " cups of water"
                     + " today. You are " + remainingRequirement + " cups away from consuming a healthy amount"
                     + " of water today.");
         } else {
@@ -263,9 +271,18 @@ public class DisplayInfo {
         } catch (IOException e) {
             System.out.println("unable to load data from " + JSON_STORE);
         } catch (JSONException e) {
+            day = CALENDER.get(Calendar.DATE);
             System.out.println("File is empty");
 
         }
+    }
+
+    public static int getDay() {
+        return day;
+    }
+
+    public static void setDay(int day) {
+        DisplayInfo.day = day;
     }
 
 }

@@ -1,5 +1,6 @@
 //package model;
 //
+//import model.exceptions.ImpossibleBodyDimensionsException;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
 //
@@ -13,7 +14,10 @@
 //    @BeforeEach
 //    public void setup() {
 //
-//        plan = new DietPlan(20, 80);
+//
+//
+//            plan = new DietPlan(180, 80);
+//
 //        plan.setDietPlanUserSelection("bulk");
 //        target = new CalorieTarget(plan);
 //

@@ -1,23 +1,30 @@
 {
-    "water consumed": 4,
+    "water consumed": 0,
+    "day of the month": 7,
     "sleep time": 0,
     "calorie target": {
-        "calories consumed": 776,
-        "remaining target": 649,
-        "original target": 1425
+        "calories consumed": 687,
+        "remaining target": 1593,
+        "original target": 2280
     },
     "food": [
         {
-            "name": "linguni",
-            "time of consumption": "7:30 PM  Sat, Mar 6",
+            "name": "rice",
+            "time of consumption": "2:13 AM  Sun, Mar 7",
             "meal type": "DINNER",
-            "total calories": 234
+            "total calories": 342
         },
         {
-            "name": "rice",
-            "time of consumption": "7:31 PM  Sat, Mar 6",
+            "name": "lisce",
+            "time of consumption": "2:13 AM  Sun, Mar 7",
+            "meal type": "BREAKFAST",
+            "total calories": 342
+        },
+        {
+            "name": "laban",
+            "time of consumption": "2:21 AM  Sun, Mar 7",
             "meal type": "SNACK",
-            "total calories": 542
+            "total calories": 3
         }
     ]
 }

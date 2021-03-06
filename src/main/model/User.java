@@ -1,9 +1,12 @@
 package model;
 
-import model.json.Writable;
+import model.persistence.Writable;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import ui.DisplayInfo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,10 +50,6 @@ public class User implements Writable {
 
     public Water getWater() {
         return waterLog;
-    }
-
-    public int getWaterSize() {
-        return waterLog.getCupsConsumed();
     }
 
     public int getFoodSize() {
@@ -126,6 +125,7 @@ public class User implements Writable {
         json.put("water consumed", waterLog.getCupsConsumed());
         json.put("sleep time", getSleepTime());
         json.put("calorie target", calorieTarget.toJson());
+        json.put("day of the month", DisplayInfo.getDay());
         return json;
 
     }
@@ -138,6 +138,13 @@ public class User implements Writable {
         }
 
         return jsonArray;
+    }
+
+    public void setAllFieldsToZero() {
+        waterLog.setCupsConsumed(0);
+        foodLog.clear();
+        calorieTarget.setCaloriesRemaining(calorieTarget.getOriginalCalorieTarget());
+        sleep.addSleepTime(-sleep.getSleepTime());
     }
 
 //scaffolding
