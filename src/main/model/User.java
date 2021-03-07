@@ -143,13 +143,13 @@ public class User implements Writable {
     public void setAllFieldsToZero() {
         waterLog.setCupsConsumed(0);
         foodLog.clear();
-        assert (foodLog.size() == 0);
+        //assert (foodLog.size() == 0);
         calorieTarget.setCaloriesRemaining(calorieTarget.getOriginalCalorieTarget());
         calorieTarget.setCaloriesConsumed(0);
         sleep.addSleepTime(-sleep.getSleepTime());
-        assert (calorieTarget.getCaloriesConsumed() == 0);
-        assert (calorieTarget.getCaloriesRemaining() == calorieTarget.getOriginalCalorieTarget());
-        assert (sleep.getSleepTime() == 0);
+        //assert (calorieTarget.getCaloriesConsumed() == 0);
+        //assert (calorieTarget.getCaloriesRemaining() == calorieTarget.getOriginalCalorieTarget());
+        //assert (sleep.getSleepTime() == 0);
     }
 
 //scaffolding

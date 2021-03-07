@@ -26,9 +26,33 @@ class DietPlanTest {
     }
 
     @Test
-    public void testDietPlanConstructorException() {
+    public void testDietPlanConstructorExceptionHeight() {
         try {
-            planOver = new DietPlan(5, 5);
+            planOver = new DietPlan(5, 20);
+            fail();
+        } catch (ImpossibleBodyDimensionsException e) {
+            //stub
+        }
+
+        try {
+            planUnder = new DietPlan(300,50);
+            fail();
+        } catch (ImpossibleBodyDimensionsException e) {
+            //stub
+        }
+    }
+
+    @Test
+    public void testDietPlanConstructorExceptionWeight() {
+        try {
+            planOver = new DietPlan(20, 5);
+            fail();
+        } catch (ImpossibleBodyDimensionsException e) {
+            //stub
+        }
+
+        try {
+            planUnder = new DietPlan(30,300);
             fail();
         } catch (ImpossibleBodyDimensionsException e) {
             //stub
@@ -45,10 +69,26 @@ class DietPlanTest {
     }
 
     @Test
-    public void testBmiCalculatorExceptionThrown() {
+    public void testBmiCalculatorExceptionThrownTooHigh() {
         DietPlan planException = null;
         try {
             planException = new DietPlan(150, 150);
+        } catch (ImpossibleBodyDimensionsException e) {
+            fail();
+        }
+        try {
+            planException.calculateBMI();
+            fail();
+        } catch (ImpossibleBodyDimensionsException e) {
+            //stub
+        }
+    }
+
+    @Test
+    public void testBmiCalculatorExceptionThrownTooLow() {
+        DietPlan planException = null;
+        try {
+            planException = new DietPlan(200, 15);
         } catch (ImpossibleBodyDimensionsException e) {
             fail();
         }
@@ -106,9 +146,19 @@ class DietPlanTest {
     }
 
     @Test
-    public void testSetDietPlanUserSelectionException() {
+    public void testSetDietPlanUserSelectionExceptionHigh() {
         try {
             planOver.setDietPlanUserSelection(4);
+            fail();
+        } catch (InvalidDietPlanException e) {
+            //stub
+        }
+    }
+
+    @Test
+    public void testSetDietPlanUserSelectionExceptionLow() {
+        try {
+            planOver.setDietPlanUserSelection(0);
             fail();
         } catch (InvalidDietPlanException e) {
             //stub

@@ -6,7 +6,6 @@ import model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
