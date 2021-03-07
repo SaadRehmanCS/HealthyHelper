@@ -1,10 +1,10 @@
 {
-    "water consumed": 0,
+    "water consumed": 2,
     "day of the month": 7,
-    "sleep time": 6,
+    "sleep time": 8,
     "calorie target": {
-        "calories consumed": 1230,
-        "remaining target": 1050,
+        "calories consumed": 1319,
+        "remaining target": 961,
         "original target": 2280
     },
     "food": [
@@ -31,6 +31,12 @@
             "time of consumption": "2:55 AM  Sun, Mar 7",
             "meal type": "SNACK",
             "total calories": 543
+        },
+        {
+            "name": "pudding",
+            "time of consumption": "5:06 AM  Sun, Mar 7",
+            "meal type": "SNACK",
+            "total calories": 89
         }
     ]
 }

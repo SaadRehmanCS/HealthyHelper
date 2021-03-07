@@ -54,11 +54,25 @@ public class UserTest {
         user.addFood(food);
 
         String printIntro = "Food items consumed today: \n   Name            Calories    Meal\n";
-        String foodDisplay = "1) " + String.format("%-16s%-12d%-10s\n",
-                food.getFoodName(), food.getTotalCalories(), food.getMealType());
+        String foodDisplay = "1) " + String.format("%-16s%-12d%-14s%-16s\n",
+                food.getFoodName(), food.getTotalCalories(), food.getMealType(), food.getTimeOfConsumption());
 
         assertEquals(user.foodDisplay(), printIntro + foodDisplay + "\n");
+    }
 
+    @Test
+    public void testAddSleep() {
+        user.addSleep(4);
+        assertEquals(4, user.getSleepTime());
+    }
 
+    @Test
+    public void testSetAllFieldsToZero() {
+        user.setAllFieldsToZero();
+        assertEquals(0, user.getWater().getCupsConsumed());
+        assertEquals(0, user.getFoodSize());
+        assertEquals(user.getCalorieTarget().getOriginalCalorieTarget(), user.getCalorieTarget().getCaloriesRemaining());
+        assertEquals(0, user.getCalorieTarget().getCaloriesConsumed());
+        assertEquals(0, user.getSleep().getSleepTime());
     }
 }

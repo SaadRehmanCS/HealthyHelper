@@ -115,7 +115,7 @@ public class User implements Writable {
     }
 
     public double getSleepTime() {
-        return sleep.getSleepTime();
+        return getSleep().getSleepTime();
     }
 
     @Override

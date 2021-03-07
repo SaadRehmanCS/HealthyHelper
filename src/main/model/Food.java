@@ -1,6 +1,5 @@
 package model;
 
-import model.exceptions.ImpossibleCalorieException;
 import model.persistence.Writable;
 import org.json.JSONObject;
 
