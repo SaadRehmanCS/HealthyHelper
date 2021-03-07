@@ -3,17 +3,16 @@ package model;
 public class Sleep {
 
     private static final double DAILY_HOURS = 8;
-    private String qualityOfSleep;
     private double sleepTime;
 
     public Sleep() {
-        qualityOfSleep = "poor";
         sleepTime = 0;
     }
 
     public double getSleepTime() {
         return sleepTime;
     }
+
     //REQUIRES: sleep time is nonnegative and less than 12
     public void addSleepTime(double sleepTime) {
         this.sleepTime += sleepTime;

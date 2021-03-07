@@ -1,10 +1,10 @@
 {
     "water consumed": 0,
     "day of the month": 7,
-    "sleep time": 0,
+    "sleep time": 6,
     "calorie target": {
-        "calories consumed": 687,
-        "remaining target": 1593,
+        "calories consumed": 1230,
+        "remaining target": 1050,
         "original target": 2280
     },
     "food": [
@@ -25,6 +25,12 @@
             "time of consumption": "2:21 AM  Sun, Mar 7",
             "meal type": "SNACK",
             "total calories": 3
+        },
+        {
+            "name": "daal",
+            "time of consumption": "2:55 AM  Sun, Mar 7",
+            "meal type": "SNACK",
+            "total calories": 543
         }
     ]
 }

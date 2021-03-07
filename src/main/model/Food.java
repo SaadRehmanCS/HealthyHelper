@@ -1,5 +1,6 @@
 package model;
 
+import model.exceptions.ImpossibleCalorieException;
 import model.persistence.Writable;
 import org.json.JSONObject;
 
@@ -15,6 +16,7 @@ public class Food implements Writable {
     //MODIFIES: this
     //EFFECTS: sets this to the values given in the parameter
     public Food(String foodName, int totalCalories, MealType mealType, String timeOfConsumption) {
+
         this.foodName = foodName;
         this.totalCalories = totalCalories;
         this.mealType = mealType;
