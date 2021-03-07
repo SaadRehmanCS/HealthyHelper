@@ -3,20 +3,22 @@ package model;
 public class Sleep {
 
     private static final double DAILY_HOURS = 8;
-    private String qualityOfSleep;
     private double sleepTime;
 
     public Sleep() {
-        qualityOfSleep = "poor";
         sleepTime = 0;
     }
 
-    //REQUIRES: sleep time is nonnegative and less than 12
+    public double getSleepTime() {
+        return sleepTime;
+    }
+
     public void addSleepTime(double sleepTime) {
         this.sleepTime += sleepTime;
     }
 
     //REQUIRES: addSleepTime() is called before it
+    //EFFECTS: returns String advice for user based on how long they slept
     public String sleepAssessment() {
         if (sleepTime < DAILY_HOURS) {
             return "You were not able to get enough sleep. Try to go to bed a little early tonight";

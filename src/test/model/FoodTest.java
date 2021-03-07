@@ -11,13 +11,14 @@ public class FoodTest {
 
     @BeforeEach
     public void setup() {
-        food = new Food("name" , 100, MealType.LUNCH);
+        food = new Food("name" , 100, MealType.LUNCH, "6:00");
     }
 
     @Test
     public void testAllGetters() {
-        assertEquals(food.getFoodName(), "name");
-        assertEquals(food.getTotalCalories(), 100);
-        assertEquals(food.getMealType(), MealType.LUNCH);
+        assertEquals("name", food.getFoodName());
+        assertEquals(100, food.getTotalCalories());
+        assertEquals(MealType.LUNCH, food.getMealType());
+        assertEquals("6:00", food.getTimeOfConsumption());
     }
 }

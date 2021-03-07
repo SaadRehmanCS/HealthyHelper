@@ -1,0 +1,11 @@
+{
+    "water consumed": 0,
+    "day of the month": 0,
+    "sleep time": 0,
+    "calorie target": {
+        "calories consumed": 0,
+        "remaining target": 0,
+        "original target": 0
+    },
+    "food": []
+}

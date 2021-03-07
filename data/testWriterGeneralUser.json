@@ -1,0 +1,16 @@
+{
+    "water consumed": 0,
+    "day of the month": 0,
+    "sleep time": 5,
+    "calorie target": {
+        "calories consumed": 0,
+        "remaining target": 0,
+        "original target": 0
+    },
+    "food": [{
+        "name": "rice",
+        "time of consumption": "8:00",
+        "meal type": "LUNCH",
+        "total calories": 200
+    }]
+}

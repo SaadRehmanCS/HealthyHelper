@@ -1,0 +1,24 @@
+{
+    "water consumed": 0,
+    "day of the month": 8,
+    "sleep time": 0,
+    "calorie target": {
+        "calories consumed": 527,
+        "remaining target": 2553,
+        "original target": 3080
+    },
+    "food": [
+        {
+            "name": "rice",
+            "time of consumption": "8:09 PM  Sun, Mar 7",
+            "meal type": "DINNER",
+            "total calories": 452
+        },
+        {
+            "name": "lint",
+            "time of consumption": "8:10 PM  Sun, Mar 7",
+            "meal type": "SNACK",
+            "total calories": 75
+        }
+    ]
+}
