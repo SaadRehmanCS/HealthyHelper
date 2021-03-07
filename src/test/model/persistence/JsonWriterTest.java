@@ -6,6 +6,7 @@ import model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -34,7 +35,22 @@ public class JsonWriterTest {
     }
 
     @Test
-    public void testWriterEmptyUser() {}
+    public void testWriterEmptyUser() {
+        try {
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyUser.json");
+            writer.open();
+            writer.write(user);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testWriterEmptyUser.json");
+            user = reader.read();
+            assertEquals(0, user.getFoodSize());
+            assertEquals(0, user.getWater().getCupsConsumed());
+            assertEquals(0, user.getCalorieTarget().getOriginalCalorieTarget());
+        } catch (IOException e) {
+            fail();
+        }
+    }
 
     @Test
     public void testWriterGeneralUser() {
@@ -56,8 +72,6 @@ public class JsonWriterTest {
             assertEquals(200, food.get(0).getTotalCalories());
             assertEquals("8:00", food.get(0).getTimeOfConsumption());
             assertEquals(0, user.getWater().getCupsConsumed());
-        } catch (FileNotFoundException e) {
-            fail();
         } catch (IOException e) {
             fail();
         }
