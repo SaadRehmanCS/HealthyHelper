@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+//Contains almost all the console print statements and user interaction.
+//Contains methods to save and/or load JSON data
 public class DisplayInfo {
 
     protected static final Calendar CALENDER = Calendar.getInstance(TimeZone.getDefault());
@@ -29,6 +31,9 @@ public class DisplayInfo {
 
     private Scanner input;
 
+    //MODIFIES: this
+    //EFFECTS: instantiates User object and JSON reader and writer. Asks the user if they are
+    //        starting a new program or simply returning
     public DisplayInfo() {
         user = new User();
         input = new Scanner(System.in);
@@ -50,6 +55,17 @@ public class DisplayInfo {
         }
     }
 
+    public static int getDay() {
+        return day;
+    }
+
+    public static void setDay(int day) {
+        DisplayInfo.day = day;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: If user is returning, it loads stored JSON data from file and continues program from main menu
+    //        If user is new, it clears all old JSON data, sets day to the current day, and begins program from start
     public void userSelection() {
         System.out.println("Are you a new or returning user?");
         System.out.println("Returning --> 1\nNew --> 0");
@@ -72,6 +88,9 @@ public class DisplayInfo {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: for new users, this is the first method to be displayed to them. It asks the user for height
+    // and weight information, and then instantiates DietPlan
     public void beginProgram() {
 
         boolean proceed = false;
@@ -95,6 +114,7 @@ public class DisplayInfo {
 
     }
 
+    //EFFECTS: prints BMI calculations for user to see.
     public void printBmiInfo() throws ImpossibleBodyDimensionsException {
         System.out.println(" Your BMI comes out to: " + dietPlan.calculateBMI()
                 + ".\n According to our estimates, you are classified as " + dietPlan.bmiAssessment()
@@ -102,6 +122,8 @@ public class DisplayInfo {
                 + "\" strategy to achieve the best results");
     }
 
+    //MODIFIES: this
+    //EFFECTS: used to help user decide their diet plan
     public void dietPlanDecider() {
 
         boolean proceed = false;
@@ -130,6 +152,7 @@ public class DisplayInfo {
         }
     }
 
+    //EFFECTS: prints CalorieTarget information for the user to see
     public void mainMenuCalorieDisplay() {
         if (user.getCalorieTarget().getCaloriesRemaining() > 0) {
             System.out.println("Your remaining calorie target to hit today is "
@@ -144,6 +167,7 @@ public class DisplayInfo {
         System.out.println("Calories consumed: " + user.getCalorieTarget().getCaloriesConsumed());
     }
 
+    //EFFECTS: prints Water information for the user to see
     public void mainMenuWaterDisplay() {
 
         if (user.getWater().getCupsConsumed() < user.getWater().getDailyRequirement()) {
@@ -158,6 +182,7 @@ public class DisplayInfo {
         System.out.println("\n");
     }
 
+    //EFFECTS: prints the logging menu options
     public void loggingDisplay() {
         System.out.println("1 ---> Add a food item consumed");
         System.out.println("2 ---> Add an amount of water consumed");
@@ -166,6 +191,8 @@ public class DisplayInfo {
         loggingEntry();
     }
 
+    //MODIFIES: this
+    //EFFECTS: runs the specific menu logging options based on user input
     public void loggingEntry() {
 
         switch (singleInputExceptionHandler()) {
@@ -187,6 +214,7 @@ public class DisplayInfo {
         }
     }
 
+    //EFFECTS: handles the user input to ensure it is correct
     public int singleInputExceptionHandler() {
         int in = 0;
         boolean proceed = false;
@@ -203,6 +231,7 @@ public class DisplayInfo {
         return in;
     }
 
+    //EFFECTS: allows user to enter new food items, and see history of previously entered food
     public void foodEntry() {
         //user.foodRecommendation();
         System.out.println(user.foodDisplay());
@@ -222,6 +251,7 @@ public class DisplayInfo {
         user.getCalorieTarget().updateCalorieTarget(food);
     }
 
+    //EFFECTS: allows the user to enter water logging information
     public void waterEntry() {
         System.out.println("How many cups of water would you like to add?");
         int waterInput = input.nextInt();
@@ -234,6 +264,7 @@ public class DisplayInfo {
 
     }
 
+    //EFFECTS: allows the user to enter sleep information
     public void sleepEntry() {
         if (sleepEntryCounter == 1) {
             System.out.print("Enter the number of hours you were able to sleep last night: ");
@@ -244,6 +275,8 @@ public class DisplayInfo {
         System.out.println(user.getSleep().sleepAssessment() + "\n");
     }
 
+    //MODIFIES: this
+    //EFFECTS: saves the data to file
     protected void saveUser() {
         try {
             jsonWriter.open();
@@ -256,6 +289,9 @@ public class DisplayInfo {
         }
     }
 
+    //REQUIRES: only run this when a new user runs the program
+    //MODIFIES: this
+    //EFFECTS: clears all user data
     private void clearUserData() {
         try {
             jsonWriter.open();
@@ -265,6 +301,8 @@ public class DisplayInfo {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: loads returning user data from file
     private void loadUser() {
         try {
             user = jsonReader.read();
@@ -276,15 +314,6 @@ public class DisplayInfo {
 
         }
     }
-
-    public static int getDay() {
-        return day;
-    }
-
-    public static void setDay(int day) {
-        DisplayInfo.day = day;
-    }
-
 }
 
 

@@ -33,3 +33,6 @@ then have the program recommend a diet plan to take on.
 information to file.
 - As a user, I want to be able to login as a returning user with pre-existing
  information, or as a new user with no pre-existing data records
+ - As a user, I want to reset all my information daily so that I can keep track 
+ of only information for one day at a time.
+ 

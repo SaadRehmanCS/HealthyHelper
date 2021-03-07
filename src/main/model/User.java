@@ -5,8 +5,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import ui.DisplayInfo;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -56,10 +54,16 @@ public class User implements Writable {
         return foodLog.size();
     }
 
-    //public void foodRecommendation() {}
-
     public void addSleep(double hours) {
         sleep.addSleepTime(hours);
+    }
+
+    public Sleep getSleep() {
+        return sleep;
+    }
+
+    public double getSleepTime() {
+        return getSleep().getSleepTime();
     }
 
     //MODIFIES: this
@@ -110,14 +114,6 @@ public class User implements Writable {
         return printIntro + print + "\n";
     }
 
-    public Sleep getSleep() {
-        return sleep;
-    }
-
-    public double getSleepTime() {
-        return getSleep().getSleepTime();
-    }
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -130,6 +126,7 @@ public class User implements Writable {
 
     }
 
+    //EFFECTS: returns a JSON type array of Food objects
     public JSONArray foodLogToJson() {
         JSONArray jsonArray = new JSONArray();
 
@@ -140,16 +137,15 @@ public class User implements Writable {
         return jsonArray;
     }
 
+    //REQUIRES: only call this method at the start of the day. Only needed to call once in a day
+    //MODIFIES: this
+    //EFFECTS: sets all fields to 0 or empty state
     public void setAllFieldsToZero() {
         waterLog.setCupsConsumed(0);
         foodLog.clear();
-        //assert (foodLog.size() == 0);
         calorieTarget.setCaloriesRemaining(calorieTarget.getOriginalCalorieTarget());
         calorieTarget.setCaloriesConsumed(0);
         sleep.addSleepTime(-sleep.getSleepTime());
-        //assert (calorieTarget.getCaloriesConsumed() == 0);
-        //assert (calorieTarget.getCaloriesRemaining() == calorieTarget.getOriginalCalorieTarget());
-        //assert (sleep.getSleepTime() == 0);
     }
 
 //scaffolding

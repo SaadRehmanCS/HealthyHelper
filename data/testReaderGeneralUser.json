@@ -1,0 +1,16 @@
+{
+  "water consumed": 0,
+  "day of the month": 7,
+  "sleep time": 0,
+  "calorie target": {
+    "calories consumed": 345,
+    "remaining target": 2735,
+    "original target": 3080
+  },
+  "food": [{
+    "name": "pizza",
+    "time of consumption": "7:58 PM  Sun, Mar 7",
+    "meal type": "SNACK",
+    "total calories": 345
+  }]
+}

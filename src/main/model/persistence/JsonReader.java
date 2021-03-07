@@ -13,21 +13,30 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-//citation: The majority of this class uses code taken from the CPSC 210 JsonSerializationDemo project
+//CITATION: Some methods in this class have been taken directly from the github
+//          repo https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+//          while others may have been slightly modified
+// credits: Paul Carter
+
+// Represents a reader that reads User from JSON data stored in file
 public class JsonReader {
 
     private String source;
 
+    // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
         this.source = source;
     }
 
+    // EFFECTS: reads User from file and returns it;
+    // throws IOException if an error occurs reading data from file
     public User read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseUser(jsonObject);
     }
 
+    // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -37,6 +46,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    // EFFECTS: parses User from JSON object and returns it
     private User parseUser(JSONObject jsonObject) {
         User user = new User();
         addFoodLog(user, jsonObject);
@@ -47,6 +57,8 @@ public class JsonReader {
 
     }
 
+    // MODIFIES: User
+    // EFFECTS: parses CalorieTarget from JSON object and adds to User
     private void addCalorieTarget(User user, JSONObject jsonObject) {
         JSONObject json = jsonObject.getJSONObject("calorie target");
         int remaining = json.getInt("remaining target");
@@ -57,6 +69,8 @@ public class JsonReader {
         user.getCalorieTarget().setCaloriesRemaining(remaining);
     }
 
+    // MODIFIES: User
+    // EFFECTS: parses Sleep and time from JSON object and adds to User
     private void addSleepAndTime(User user, JSONObject jsonObject) {
         double sleepTime = jsonObject.getDouble("sleep time");
         int day = jsonObject.getInt("day of the month");
@@ -64,19 +78,25 @@ public class JsonReader {
         DisplayInfo.setDay(day);
     }
 
+    // MODIFIES: User
+    // EFFECTS: parses Water from JSON object and adds to User
     private void addWater(User user, JSONObject jsonObject) {
         int amountConsumed = jsonObject.getInt("water consumed");
         user.drinkWater(amountConsumed);
     }
 
+    // MODIFIES: User
+    // EFFECTS: parses foodLog from JSON object and adds to User
     private void addFoodLog(User user, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("food");
-        for (Object json: jsonArray) {
+        for (Object json : jsonArray) {
             JSONObject nextFood = (JSONObject) json;
             addFood(user, nextFood);
         }
     }
 
+    // MODIFIES: User
+    // EFFECTS: parses food from JSON object and adds to User
     private void addFood(User user, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int totalCalories = jsonObject.getInt("total calories");

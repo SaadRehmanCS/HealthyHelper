@@ -13,12 +13,12 @@ public class Sleep {
         return sleepTime;
     }
 
-    //REQUIRES: sleep time is nonnegative and less than 12
     public void addSleepTime(double sleepTime) {
         this.sleepTime += sleepTime;
     }
 
     //REQUIRES: addSleepTime() is called before it
+    //EFFECTS: returns String advice for user based on how long they slept
     public String sleepAssessment() {
         if (sleepTime < DAILY_HOURS) {
             return "You were not able to get enough sleep. Try to go to bed a little early tonight";

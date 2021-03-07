@@ -1,13 +1,14 @@
 package model;
 
 import model.exceptions.ImpossibleBodyDimensionsException;
+import model.persistence.Writable;
 import org.json.JSONObject;
 
 //instantiating an object of this class type
 //will set a calorie target for the user based on their diet plan,
 //that must then be tracked constantly to update
 //anytime the user consumes food
-public class CalorieTarget {
+public class CalorieTarget implements Writable {
 
     private int caloriesRemaining;
     private int caloriesConsumed;
@@ -36,6 +37,8 @@ public class CalorieTarget {
     }
 
     //REQUIRES: should only be called once, when deciding meal plan
+    //MODIFIES: this
+    //EFFECTS: sets the starting target for calories needed based on the diet plan
     public void setOriginalTarget(DietPlan plan) throws ImpossibleBodyDimensionsException {
         if (plan.getSelectedPlan().equals("bulk")) {
             caloriesRemaining = (int) plan.calculateBMI() * 125;
@@ -70,6 +73,7 @@ public class CalorieTarget {
         return ORIGINAL_CALORIE_TARGET;
     }
 
+    @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("remaining target", caloriesRemaining);

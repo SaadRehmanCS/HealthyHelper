@@ -12,9 +12,8 @@ public class DietPlan {
     private double weight;
     private String selectedPlan;
 
-    //REQUIRES: height must be in cm, weight must be in kg
     //MODIFIES: this
-    //EFFECTS: sets the users height and weight
+    //EFFECTS: sets the users height and weight, throws exception if impossible dimensions are entered
     public DietPlan(double height, double weight) throws ImpossibleBodyDimensionsException {
 
         if (height < 10 || height > 250 || weight < 10 || weight > 200) {
@@ -24,9 +23,29 @@ public class DietPlan {
         this.weight = weight;
     }
 
+    public String getSelectedPlan() {
+        return selectedPlan;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: sets this to the user-selected diet plan
+    public void setDietPlanUserSelection(int userInput) throws InvalidDietPlanException {
+        if (userInput < 1 || userInput > 3) {
+            throw new InvalidDietPlanException();
+        }
+
+        if (userInput == 1) {
+            selectedPlan = "bulk";
+        } else if (userInput == 2) {
+            selectedPlan = "cut";
+        } else {
+            selectedPlan = "maintain";
+        }
+    }
+
     //EFFECTS: calculates the BMI, then formats it
     //     so there are only 3 significant figures,
-    //     and returns the double value
+    //     and returns the double value. Throws exception if abnormal BMI is calculated
     public double calculateBMI() throws ImpossibleBodyDimensionsException {
 
         double bmi = weight / Math.pow((height / 100), 2);
@@ -42,7 +61,7 @@ public class DietPlan {
 
     //EFFECTS: based on the calculated BMI, it
     //     determines the body type classification
-    //     given a set of ranges the BMI can fall under
+    //     given a set of ranges the BMI can fall under.
     public String bmiAssessment() throws ImpossibleBodyDimensionsException {
 
         if (calculateBMI() < 18.5) {
@@ -68,27 +87,4 @@ public class DietPlan {
             return "cut";
         }
     }
-
-    //MODIFIES: this
-    //EFFECTS: sets this to the user-selected diet plan
-    public void setDietPlanUserSelection(int userInput) throws InvalidDietPlanException {
-        if (userInput < 1 || userInput > 3) {
-            throw new InvalidDietPlanException();
-        }
-
-        if (userInput == 1) {
-            selectedPlan = "bulk";
-        } else if (userInput == 2) {
-            selectedPlan = "cut";
-        } else {
-            selectedPlan = "maintain";
-        }
-
-    }
-
-    public String getSelectedPlan() {
-        return selectedPlan;
-    }
-
-
 }

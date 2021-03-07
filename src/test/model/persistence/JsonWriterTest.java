@@ -13,6 +13,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//CITATION: Some methods in this class have been taken directly from the github
+//          repo https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+//          while others may have been slightly modified
+// credits: Paul Carter
+
 public class JsonWriterTest {
 
     User user;
