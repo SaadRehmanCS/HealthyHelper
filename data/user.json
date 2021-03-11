@@ -1,24 +1,16 @@
 {
-    "water consumed": 0,
-    "day of the month": 8,
+    "water consumed": 5,
+    "day of the month": 11,
     "sleep time": 0,
     "calorie target": {
-        "calories consumed": 527,
-        "remaining target": 2553,
-        "original target": 3080
+        "calories consumed": 342,
+        "remaining target": 2408,
+        "original target": 2750
     },
-    "food": [
-        {
-            "name": "rice",
-            "time of consumption": "8:09 PM  Sun, Mar 7",
-            "meal type": "DINNER",
-            "total calories": 452
-        },
-        {
-            "name": "lint",
-            "time of consumption": "8:10 PM  Sun, Mar 7",
-            "meal type": "SNACK",
-            "total calories": 75
-        }
-    ]
+    "food": [{
+        "name": "pasta",
+        "time of consumption": "9:06 PM  Thu, Mar 11",
+        "meal type": "SNACK",
+        "total calories": 342
+    }]
 }
