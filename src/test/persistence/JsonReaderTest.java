@@ -1,4 +1,4 @@
-package model.persistence;
+package persistence;
 
 import model.User;
 import org.junit.jupiter.api.Test;

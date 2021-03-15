@@ -35,7 +35,7 @@ public class Water {
     //EFFECTS: increments the amount consumed by the number of cups in
     //      the parameter
     public void setCupsConsumed(int cups) {
-        cupsConsumed += cups;
+        cupsConsumed = cups;
     }
 
 }

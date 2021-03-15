@@ -1,6 +1,6 @@
 package model;
 
-import model.persistence.Writable;
+import persistence.Writable;
 import org.json.JSONObject;
 
 //this object type stores a food item with three attributes,

@@ -1,4 +1,4 @@
-package model.persistence;
+package persistence;
 
 import model.Food;
 import model.MealType;

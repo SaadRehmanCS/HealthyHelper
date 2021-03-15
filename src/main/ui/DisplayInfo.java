@@ -5,8 +5,8 @@ import model.Food;
 import model.User;
 import model.exceptions.ImpossibleBodyDimensionsException;
 import model.exceptions.InvalidDietPlanException;
-import model.persistence.JsonReader;
-import model.persistence.JsonWriter;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import org.json.JSONException;
 
 import java.io.FileNotFoundException;

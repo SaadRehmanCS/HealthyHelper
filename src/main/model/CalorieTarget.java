@@ -1,7 +1,7 @@
 package model;
 
 import model.exceptions.ImpossibleBodyDimensionsException;
-import model.persistence.Writable;
+import persistence.Writable;
 import org.json.JSONObject;
 
 //instantiating an object of this class type

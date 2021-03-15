@@ -1,16 +1,11 @@
 {
-    "water consumed": 5,
-    "day of the month": 11,
+    "water consumed": 0,
+    "day of the month": 16,
     "sleep time": 0,
     "calorie target": {
-        "calories consumed": 342,
-        "remaining target": 2408,
-        "original target": 2750
+        "calories consumed": 0,
+        "remaining target": 2280,
+        "original target": 2280
     },
-    "food": [{
-        "name": "pasta",
-        "time of consumption": "9:06 PM  Thu, Mar 11",
-        "meal type": "SNACK",
-        "total calories": 342
-    }]
+    "food": []
 }
