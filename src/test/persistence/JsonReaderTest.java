@@ -2,7 +2,7 @@ package persistence;
 
 import model.User;
 import org.junit.jupiter.api.Test;
-import ui.DisplayInfo;
+//import ui.DisplayInfo;
 
 import java.io.IOException;
 
@@ -47,7 +47,7 @@ public class JsonReaderTest {
             User user = reader.read();
             assertEquals(1, user.getFoodSize());
             assertEquals(345, user.getCalorieTarget().getCaloriesConsumed());
-            assertEquals(7, DisplayInfo.getDay());
+            //assertEquals(7, DisplayInfo.getDay());
         } catch (IOException e) {
             fail();
         }
