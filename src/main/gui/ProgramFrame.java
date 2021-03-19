@@ -1,6 +1,10 @@
 package gui;
 
+import model.DietPlan;
+import model.Food;
+import model.MealType;
 import model.User;
+import model.exceptions.ImpossibleBodyDimensionsException;
 import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -15,7 +19,7 @@ import java.util.TimeZone;
 
 public class ProgramFrame extends JFrame {
 
-    private static final String JSON_STORE = "./data/user.json";
+    public static final String JSON_STORE = "./data/user.json";
     public static final Color buttonBackgroundColor = Color.CYAN;
     public static final Color buttonForegroundColor = Color.CYAN;
     JPanel startPanel;
@@ -24,12 +28,12 @@ public class ProgramFrame extends JFrame {
     JLabel returnPrompt;
     JButton returnBtn;
     static JsonWriter jsonWriter;
-    JsonReader jsonReader;
+    static JsonReader jsonReader;
     static Integer day;
-    protected static final Calendar CALENDER = Calendar.getInstance(TimeZone.getDefault());
+    static final Calendar CALENDER = Calendar.getInstance(TimeZone.getDefault());
     NewUserPanel newUserPanel;
     MainMenuPanel mainMenuPanel;
-    User user;
+    static User user;
 
 
     public ProgramFrame() {
@@ -37,28 +41,17 @@ public class ProgramFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(new Dimension(600, 600));
         setLocationRelativeTo(null);
-        setImageIcon();
         day = 0;
-        mainMenuPanel = new MainMenuPanel(this);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+        user = new User();
+        //mainMenuPanel = new MainMenuPanel(this);
         newUserPanel = new NewUserPanel(this);
-        user = MainMenuPanel.getUser();
 
         add(createStartPanel());
         setVisible(true);
         setResizable(false);
-        jsonWriter = new JsonWriter(JSON_STORE);
-        jsonReader = new JsonReader(JSON_STORE);
-    }
 
-    public void setImageIcon() {
-        ImageIcon icon;
-        URL imgURL = ProgramFrame.class.getResource("tobs.jpg");
-        if (imgURL != null) {
-            icon = new ImageIcon(imgURL);
-            setIconImage(icon.getImage());
-        } else {
-            JOptionPane.showMessageDialog(this, "Icon image not found.");
-        }
     }
 
     public JPanel createStartPanel() {
@@ -71,9 +64,14 @@ public class ProgramFrame extends JFrame {
         startBtn.setBackground(buttonBackgroundColor);
         startBtn.setForeground(buttonForegroundColor);
         startBtn.addActionListener(e -> {
-            clearUserData();
+            //user = new User();
+            //user.setAllFieldsToZero();
+//            clearUserData();
+//           MainMenuPanel.loadUser();
             day = CALENDER.get(Calendar.DATE);
-            switchPanelFromStartPanel(startPanel, newUserPanel);
+            switchStartPanelToNewUserPanel();
+            //mainMenuPanel = new MainMenuPanel(this);
+
         });
 
         constructJLabel(returnPrompt, "Otherwise, click here to continue your journey", 180);
@@ -82,7 +80,7 @@ public class ProgramFrame extends JFrame {
         returnBtn.setBackground(buttonBackgroundColor);
         returnBtn.addActionListener(e -> {
             loadUser();
-            switchPanelFromStartPanel(startPanel, mainMenuPanel);
+            switchStartPanelToMainMenuPanel();
         });
 
         return startPanel;
@@ -114,7 +112,21 @@ public class ProgramFrame extends JFrame {
         setVisible(true);
     }
 
+    public void switchStartPanelToNewUserPanel() {
+        remove(startPanel);
+        add(newUserPanel);
+        setVisible(true);
+    }
+
+    public void switchStartPanelToMainMenuPanel() {
+        mainMenuPanel = new MainMenuPanel(this);
+        remove(startPanel);
+        add(mainMenuPanel);
+        setVisible(true);
+    }
+
     public void switchNewUserToMainMenuPanel() {
+        mainMenuPanel = new MainMenuPanel(this);
         remove(newUserPanel);
         add(mainMenuPanel);
         setVisible(true);
@@ -151,6 +163,9 @@ public class ProgramFrame extends JFrame {
 
             protected void saveUser() {
                 try {
+                    //MainMenuPanel.getUser().addFood(new Food("rice", 232, MealType.LUNCH, ""));
+                    //MainMenuPanel.getUser().addSleep(5);
+                    //MainMenuPanel.getUser().drinkWater(4);
                     jsonWriter.open();
                     jsonWriter.write(MainMenuPanel.getUser());
                     jsonWriter.close();
@@ -163,20 +178,25 @@ public class ProgramFrame extends JFrame {
         }, "Shutdown-thread"));
     }
 
-    private void loadUser() {
+    public static void loadUser() {
         try {
             user = jsonReader.read();
         } catch (IOException e) {
             System.out.println("unable to load data from " + JSON_STORE);
         } catch (JSONException e) {
-            day = CALENDER.get(Calendar.DATE);
+            ProgramFrame.day = CALENDER.get(Calendar.DATE);
             System.out.println("File is empty");
 
         }
     }
 
+
     public static Integer getDay() {
         return day;
+    }
+
+    public static void setDay(int day) {
+        ProgramFrame.day = day;
     }
 
 }

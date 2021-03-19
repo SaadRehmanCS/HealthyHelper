@@ -1,10 +1,11 @@
 package model;
 
-import gui.ProgramFrame;
 import persistence.Writable;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import ui.DisplayInfo;
+//import ui.DisplayInfo;
+import gui.ProgramFrame;
+
 
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class User implements Writable {
     public void addFood(Food food) {
         foodLog.add(food);
         mealTypeLog.add(food.getMealType());
+        calorieTarget.updateCalorieTarget(food);
     }
 
     public CalorieTarget getCalorieTarget() {
@@ -123,6 +125,8 @@ public class User implements Writable {
         json.put("sleep time", getSleepTime());
         json.put("calorie target", calorieTarget.toJson());
         json.put("day of the month", ProgramFrame.getDay());
+        //json.put("day of the month", DisplayInfo.getDay());
+
         return json;
 
     }

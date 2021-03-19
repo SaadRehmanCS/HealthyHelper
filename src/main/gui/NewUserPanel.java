@@ -4,7 +4,6 @@ import model.DietPlan;
 import model.User;
 import model.exceptions.ImpossibleBodyDimensionsException;
 
-import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
 
 public class NewUserPanel extends JPanel {
@@ -28,7 +27,7 @@ public class NewUserPanel extends JPanel {
     public NewUserPanel(ProgramFrame frame) {
         super(null, false);
         this.frame = frame;
-        user = MainMenuPanel.getUser();
+        user = ProgramFrame.user;
         promptUserInformation();
     }
 
@@ -138,7 +137,7 @@ public class NewUserPanel extends JPanel {
                 maintainBtn.setBackground(ProgramFrame.buttonBackgroundColor);
             }
         } catch (ImpossibleBodyDimensionsException e) {
-            //
+            e.printStackTrace();
         }
     }
 }

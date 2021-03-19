@@ -248,7 +248,6 @@ public class DisplayInfo {
         String timeOfConsumption = formatter.format(date);
         Food food = new Food(foodName, foodCalories, user.getMealTypeFromNums(intMealType), timeOfConsumption);
         user.addFood(food);
-        user.getCalorieTarget().updateCalorieTarget(food);
     }
 
     //EFFECTS: allows the user to enter water logging information

@@ -3,30 +3,49 @@ package gui;
 import javax.swing.*;
 
 import model.User;
+import org.json.JSONException;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.TimeZone;
+
+import static gui.ProgramFrame.*;
 
 public class MainMenuPanel extends JPanel {
 
     ProgramFrame frame;
-    static User user;
+    private static User user;
     Integer day;
+    JLabel caloriesConsumed;
+    JLabel originalCalorieTarget;
 
     public MainMenuPanel(ProgramFrame frame) {
+        super(null, false);
         day = ProgramFrame.getDay();
-        user = new User();
-        beginNewDayProtocol(day);
+        user = ProgramFrame.user;
+        //loadUser();
+        //beginNewDayProtocol(day);
         this.frame = frame;
-        new JPanel();
-        //setLayout(null);
-        JTabbedPane pane = new JTabbedPane();
-        JComponent button = new JButton("Hello");
-        pane.addTab("Tab 1", button);
-        JComponent button2 = new JButton("Second");
-        pane.addTab("Tab 2", button2);
-        add(pane);
+
+//        System.out.println("consumed " + user.getCalorieTarget().getCaloriesConsumed());
+//        System.out.println("remaining " + user.getCalorieTarget().getCaloriesRemaining());
+//        System.out.println("original " + user.getCalorieTarget().getOriginalCalorieTarget());
+//        System.out.println("water consumed " + user.getWater().getCupsConsumed());
+//        System.out.println("food size " + user.getFoodSize());
+//        System.out.println("day " + day);
+//        System.out.println("sleep time " + user.getSleep().getSleepTime());
+        addCalorieInformation();
+    }
+
+    public void addCalorieInformation() {
+        caloriesConsumed = new JLabel("<html>Consumed<br>" + user.getCalorieTarget().getCaloriesConsumed() + "</html>");
+        caloriesConsumed.setBounds(50, 60, 100, 100);
+        add(caloriesConsumed);
+
+        originalCalorieTarget = new JLabel("<html>Original<br>Target<br>"
+                + user.getCalorieTarget().getOriginalCalorieTarget() + "</html>");
+        originalCalorieTarget.setBounds(300, 40, 100, 100);
+        add(originalCalorieTarget);
     }
 
 
