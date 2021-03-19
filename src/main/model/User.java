@@ -1,5 +1,6 @@
 package model;
 
+import gui.ProgramFrame;
 import persistence.Writable;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -121,8 +122,7 @@ public class User implements Writable {
         json.put("water consumed", waterLog.getCupsConsumed());
         json.put("sleep time", getSleepTime());
         json.put("calorie target", calorieTarget.toJson());
-        json.put("day of the month", 0);
-        json.put("day of the month", DisplayInfo.getDay());
+        json.put("day of the month", ProgramFrame.getDay());
         return json;
 
     }

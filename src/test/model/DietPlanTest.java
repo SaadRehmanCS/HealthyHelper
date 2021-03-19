@@ -35,7 +35,7 @@ class DietPlanTest {
         }
 
         try {
-            planUnder = new DietPlan(300,50);
+            planUnder = new DietPlan(300, 50);
             fail();
         } catch (ImpossibleBodyDimensionsException e) {
             //stub
@@ -52,7 +52,7 @@ class DietPlanTest {
         }
 
         try {
-            planUnder = new DietPlan(30,300);
+            planUnder = new DietPlan(30, 300);
             fail();
         } catch (ImpossibleBodyDimensionsException e) {
             //stub
@@ -137,31 +137,10 @@ class DietPlanTest {
 
     @Test
     public void testGetSelectedPlan() {
-        try {
-            planOver.setDietPlanUserSelection(2);
-        } catch (InvalidDietPlanException e) {
-            fail();
-        }
+
+        planOver.setDietPlanUserSelection(2);
+
         assertEquals(planOver.getSelectedPlan(), "cut");
     }
 
-    @Test
-    public void testSetDietPlanUserSelectionExceptionHigh() {
-        try {
-            planOver.setDietPlanUserSelection(4);
-            fail();
-        } catch (InvalidDietPlanException e) {
-            //stub
-        }
-    }
-
-    @Test
-    public void testSetDietPlanUserSelectionExceptionLow() {
-        try {
-            planOver.setDietPlanUserSelection(0);
-            fail();
-        } catch (InvalidDietPlanException e) {
-            //stub
-        }
-    }
 }

@@ -145,7 +145,7 @@ public class DisplayInfo {
                 dietPlan.setDietPlanUserSelection(input.nextInt());
                 user.getCalorieTarget().setOriginalTarget(dietPlan);
                 proceed = true;
-            } catch (InvalidDietPlanException | ImpossibleBodyDimensionsException | InputMismatchException e) {
+            } catch (ImpossibleBodyDimensionsException | InputMismatchException e) {
                 System.out.println(e);
                 input.nextLine();
             }

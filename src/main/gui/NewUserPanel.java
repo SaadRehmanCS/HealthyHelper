@@ -1,10 +1,11 @@
 package gui;
 
 import model.DietPlan;
+import model.User;
 import model.exceptions.ImpossibleBodyDimensionsException;
 
+import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
-import java.util.InputMismatchException;
 
 public class NewUserPanel extends JPanel {
 
@@ -14,20 +15,21 @@ public class NewUserPanel extends JPanel {
     JLabel weightLabel;
     JTextField weightText;
     JButton enterButton;
-    private DietPlan dietPlan;
+    DietPlan dietPlan;
     JLabel exceptionMsg;
     JLabel bmiInfo;
     JButton cutBtn;
     JButton bulkBtn;
     JButton maintainBtn;
+    ProgramFrame frame;
+    User user;
 
 
-    public NewUserPanel() {
-
-        new JPanel();
-        setLayout(null);
+    public NewUserPanel(ProgramFrame frame) {
+        super(null, false);
+        this.frame = frame;
+        user = MainMenuPanel.getUser();
         promptUserInformation();
-
     }
 
     private void promptUserInformation() {
@@ -72,7 +74,7 @@ public class NewUserPanel extends JPanel {
                 bmiInfo = new JLabel();
                 bmiInfo.setText("<html><body>Your BMI comes out to: " + dietPlan.calculateBMI()
                         + ".<br>According to our estimates, you are classified as " + dietPlan.bmiAssessment()
-                        + ".<br> Based on this, we recommend that you choose the <b>" + dietPlan.dietPlanRecommendation()
+                        + ".<br> Based on this we recommend that you choose the <b>" + dietPlan.dietPlanRecommendation()
                         + "</b> strategy<br> to achieve the best results</body></html>");
                 bmiPlanPicker();
             } catch (NumberFormatException exception) {
@@ -87,10 +89,56 @@ public class NewUserPanel extends JPanel {
 
     private void bmiPlanPicker() {
         add(bmiInfo);
+        dietPlan.setDietPlanUserSelection(2);
         bmiInfo.setBounds(80, 290, 1000, 100);
-        cutBtn = new JButton("Cut");
-        bulkBtn = new JButton("Bulk");
-        maintainBtn = new JButton("Maintain");
 
+        handlePlanButtonClick();
+
+        try {
+            user.getCalorieTarget().setOriginalTarget(dietPlan);
+        } catch (ImpossibleBodyDimensionsException exception) {
+            System.out.println("exception");
+        }
+    }
+
+    public void handlePlanButtonClick() {
+        cutBtn = new JButton("Cut");
+        add(cutBtn);
+        cutBtn.setBounds(80, 390, 80, 50);
+        cutBtn.addActionListener(e -> {
+            dietPlan.setDietPlanUserSelection(2);
+            frame.switchNewUserToMainMenuPanel();
+        });
+
+        bulkBtn = new JButton("Bulk");
+        add(bulkBtn);
+        bulkBtn.setBounds(170, 390, 80, 50);
+        bulkBtn.addActionListener(e -> {
+            dietPlan.setDietPlanUserSelection(1);
+            frame.switchNewUserToMainMenuPanel();
+        });
+
+        maintainBtn = new JButton("Maintain");
+        add(maintainBtn);
+        maintainBtn.setBounds(260, 390, 100, 50);
+        maintainBtn.addActionListener(e -> {
+            dietPlan.setDietPlanUserSelection(3);
+            frame.switchNewUserToMainMenuPanel();
+        });
+        setRecommendedButtonColor();
+    }
+
+    private void setRecommendedButtonColor() {
+        try {
+            if (dietPlan.dietPlanRecommendation().equals("cut")) {
+                cutBtn.setBackground(ProgramFrame.buttonBackgroundColor);
+            } else if (dietPlan.dietPlanRecommendation().equals("bulk")) {
+                bulkBtn.setBackground(ProgramFrame.buttonBackgroundColor);
+            } else {
+                maintainBtn.setBackground(ProgramFrame.buttonBackgroundColor);
+            }
+        } catch (ImpossibleBodyDimensionsException e) {
+            //
+        }
     }
 }
