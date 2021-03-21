@@ -1,11 +1,13 @@
-package model.persistence;
+package persistence;
 
 import model.Food;
 import model.MealType;
 import model.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import ui.DisplayInfo;
+//import ui.DisplayInfo;
+import gui.ProgramFrame;
+
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -75,7 +77,8 @@ public class JsonReader {
         double sleepTime = jsonObject.getDouble("sleep time");
         int day = jsonObject.getInt("day of the month");
         user.addSleep(sleepTime);
-        DisplayInfo.setDay(day);
+        //DisplayInfo.setDay(day);
+        ProgramFrame.setDay(day);
     }
 
     // MODIFIES: User

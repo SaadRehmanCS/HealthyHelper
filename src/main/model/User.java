@@ -1,9 +1,11 @@
 package model;
 
-import model.persistence.Writable;
+import persistence.Writable;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import ui.DisplayInfo;
+//import ui.DisplayInfo;
+import gui.ProgramFrame;
+
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,6 +38,7 @@ public class User implements Writable {
     public void addFood(Food food) {
         foodLog.add(food);
         mealTypeLog.add(food.getMealType());
+        calorieTarget.updateCalorieTarget(food);
     }
 
     public CalorieTarget getCalorieTarget() {
@@ -97,6 +100,16 @@ public class User implements Writable {
         }
     }
 
+    public int getAllCaloriesForMealType(MealType mealType) {
+        int calories = 0;
+        for (Food food: foodLog) {
+            if (food.getMealType() == mealType) {
+                calories += food.getCalories();
+            }
+        }
+        return calories;
+    }
+
     //EFFECTS: returns a string that will be displayed on the console,
     //      it is the list of food items consumed throughout the day
     public String foodDisplay() {
@@ -108,7 +121,7 @@ public class User implements Writable {
         String print = "";
         for (Food food : getFoodLog()) {
             print += (++i) + ") " + String.format("%-16s%-12d%-14s%-16s\n",
-                    food.getFoodName(), food.getTotalCalories(), food.getMealType(), food.getTimeOfConsumption());
+                    food.getFoodName(), food.getCalories(), food.getMealType(), food.getTimeOfConsumption());
         }
 
         return printIntro + print + "\n";
@@ -121,7 +134,9 @@ public class User implements Writable {
         json.put("water consumed", waterLog.getCupsConsumed());
         json.put("sleep time", getSleepTime());
         json.put("calorie target", calorieTarget.toJson());
-        json.put("day of the month", DisplayInfo.getDay());
+        json.put("day of the month", ProgramFrame.getDay());
+        //json.put("day of the month", DisplayInfo.getDay());
+
         return json;
 
     }

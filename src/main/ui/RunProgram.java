@@ -26,7 +26,7 @@ public class RunProgram extends DisplayInfo {
 
         saveUser();
         System.out.println("Thank you!");
-        System.out.println("Come back tomorrow to keep tracking fitness goals and more!");
+        System.out.println("Come back soon to keep tracking fitness goals and more!");
     }
 
     //MODIFIES: this, User
@@ -35,22 +35,29 @@ public class RunProgram extends DisplayInfo {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         int currentDay = calendar.get(Calendar.DATE);
 
+        int currentTime = calendar.get(Calendar.HOUR_OF_DAY);
+        String typeOfTime;
+        if (currentTime < 11) {
+            typeOfTime = "morning";
+        } else if (currentTime < 16) {
+            typeOfTime = "afternoon";
+        } else if (currentTime < 20) {
+            typeOfTime = "evening";
+        } else {
+            typeOfTime = "night";
+        }
         if (currentDay != declaredDay) {
             user.setAllFieldsToZero();
             day = currentDay;
-            System.out.println("Good morning! Good job on your progress yesterday,\n"
+            System.out.println("Good " + typeOfTime + "! Good job on your progress yesterday,\n"
                     + "lets start tracking information for today:");
         }
-
-
-
-
     }
 
     //EFFECTS: displays random fun facts from facts.txt file
     public String displayRandomFacts() {
 
-        Scanner scanner = null;
+        Scanner scanner;
         try {
             File file = new File("facts.txt");
             scanner = new Scanner(file);

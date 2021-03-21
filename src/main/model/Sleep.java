@@ -13,6 +13,8 @@ public class Sleep {
         return sleepTime;
     }
 
+    //MODIFIES: this
+    //EFFECTS: increments sleep time by the additional amount
     public void addSleepTime(double sleepTime) {
         this.sleepTime += sleepTime;
     }

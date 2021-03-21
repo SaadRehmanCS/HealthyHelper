@@ -1,4 +1,4 @@
-package model.persistence;
+package persistence;
 
 import model.Food;
 import model.MealType;
@@ -73,7 +73,7 @@ public class JsonWriterTest {
             List<Food> food = user.getFoodLog();
             assertEquals(1, food.size());
             assertEquals("rice", food.get(0).getFoodName());
-            assertEquals(200, food.get(0).getTotalCalories());
+            assertEquals(200, food.get(0).getCalories());
             assertEquals("8:00", food.get(0).getTimeOfConsumption());
             assertEquals(0, user.getWater().getCupsConsumed());
         } catch (IOException e) {

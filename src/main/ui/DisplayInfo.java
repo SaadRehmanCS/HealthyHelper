@@ -5,8 +5,8 @@ import model.Food;
 import model.User;
 import model.exceptions.ImpossibleBodyDimensionsException;
 import model.exceptions.InvalidDietPlanException;
-import model.persistence.JsonReader;
-import model.persistence.JsonWriter;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import org.json.JSONException;
 
 import java.io.FileNotFoundException;
@@ -145,7 +145,7 @@ public class DisplayInfo {
                 dietPlan.setDietPlanUserSelection(input.nextInt());
                 user.getCalorieTarget().setOriginalTarget(dietPlan);
                 proceed = true;
-            } catch (InvalidDietPlanException | ImpossibleBodyDimensionsException | InputMismatchException e) {
+            } catch (ImpossibleBodyDimensionsException | InputMismatchException e) {
                 System.out.println(e);
                 input.nextLine();
             }
@@ -248,7 +248,6 @@ public class DisplayInfo {
         String timeOfConsumption = formatter.format(date);
         Food food = new Food(foodName, foodCalories, user.getMealTypeFromNums(intMealType), timeOfConsumption);
         user.addFood(food);
-        user.getCalorieTarget().updateCalorieTarget(food);
     }
 
     //EFFECTS: allows the user to enter water logging information

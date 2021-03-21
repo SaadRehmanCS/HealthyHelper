@@ -29,10 +29,7 @@ public class DietPlan {
 
     //MODIFIES: this
     //EFFECTS: sets this to the user-selected diet plan
-    public void setDietPlanUserSelection(int userInput) throws InvalidDietPlanException {
-        if (userInput < 1 || userInput > 3) {
-            throw new InvalidDietPlanException();
-        }
+    public void setDietPlanUserSelection(int userInput) {
 
         if (userInput == 1) {
             selectedPlan = "bulk";

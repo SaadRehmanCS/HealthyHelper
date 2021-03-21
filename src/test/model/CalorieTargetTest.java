@@ -21,11 +21,9 @@ public class CalorieTargetTest {
             fail();
         }
 
-        try {
-            plan.setDietPlanUserSelection(1);
-        } catch (InvalidDietPlanException e) {
-            fail();
-        }
+
+        plan.setDietPlanUserSelection(1);
+
         target = new CalorieTarget();
         try {
             target.setOriginalTarget(plan);
@@ -60,7 +58,7 @@ public class CalorieTargetTest {
         try {
             plan.setDietPlanUserSelection(1);
             target.setOriginalTarget(plan);
-        } catch (InvalidDietPlanException | ImpossibleBodyDimensionsException e) {
+        } catch (ImpossibleBodyDimensionsException e) {
             fail();
         }
         try {
@@ -76,7 +74,7 @@ public class CalorieTargetTest {
         try {
             plan.setDietPlanUserSelection(2);
             target.setOriginalTarget(plan);
-        } catch (InvalidDietPlanException | ImpossibleBodyDimensionsException e) {
+        } catch (ImpossibleBodyDimensionsException e) {
             fail();
         }
         try {
@@ -97,7 +95,7 @@ public class CalorieTargetTest {
         try {
             plan.setDietPlanUserSelection(3);
             target.setOriginalTarget(plan);
-        } catch (InvalidDietPlanException | ImpossibleBodyDimensionsException e) {
+        } catch (ImpossibleBodyDimensionsException e) {
             fail();
         }
         try {

@@ -17,7 +17,7 @@ public class FoodTest {
     @Test
     public void testAllGetters() {
         assertEquals("name", food.getFoodName());
-        assertEquals(100, food.getTotalCalories());
+        assertEquals(100, food.getCalories());
         assertEquals(MealType.LUNCH, food.getMealType());
         assertEquals("6:00", food.getTimeOfConsumption());
     }
