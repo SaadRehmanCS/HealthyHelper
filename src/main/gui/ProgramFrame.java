@@ -1,19 +1,17 @@
 package gui;
 
-import model.DietPlan;
-import model.Food;
-import model.MealType;
+
 import model.User;
-import model.exceptions.ImpossibleBodyDimensionsException;
 import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -22,6 +20,7 @@ public class ProgramFrame extends JFrame {
     public static final String JSON_STORE = "./data/user.json";
     public static final Color buttonBackgroundColor = Color.CYAN;
     public static final Color buttonForegroundColor = Color.CYAN;
+    public static final Color buttonBackgroundColorUnfavourable = Color.lightGray;
     JPanel startPanel;
     JLabel startPrompt;
     JButton startBtn;
@@ -45,7 +44,6 @@ public class ProgramFrame extends JFrame {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         user = new User();
-        //mainMenuPanel = new MainMenuPanel(this);
         newUserPanel = new NewUserPanel(this);
 
         add(createStartPanel());
@@ -148,14 +146,13 @@ public class ProgramFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        try {
-            // Set System L&F
-            UIManager.setLookAndFeel(new com.bulenkov.darcula.DarculaLaf());
-        } catch (UnsupportedLookAndFeelException e) {
-            // handle exception
-        }
+        setLookAndFeel();
         new ProgramFrame();
+        saveDataOnClose();
 
+    }
+
+    public static void saveDataOnClose() {
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
                 saveUser();
@@ -166,16 +163,29 @@ public class ProgramFrame extends JFrame {
                     //MainMenuPanel.getUser().addFood(new Food("rice", 232, MealType.LUNCH, ""));
                     //MainMenuPanel.getUser().addSleep(5);
                     //MainMenuPanel.getUser().drinkWater(4);
-                    jsonWriter.open();
-                    jsonWriter.write(MainMenuPanel.getUser());
-                    jsonWriter.close();
-                    System.out.println("File was saved to " + JSON_STORE);
+                    if (MainMenuPanel.getUser() == null) {
+                        System.out.println("User closed program too early");
+                    } else {
+                        jsonWriter.open();
+                        jsonWriter.write(MainMenuPanel.getUser());
+                        jsonWriter.close();
+                        System.out.println("File was saved to " + JSON_STORE);
+                    }
 
                 } catch (FileNotFoundException e) {
                     System.out.println("Unable to save file");
                 }
             }
         }, "Shutdown-thread"));
+    }
+
+    public static void setLookAndFeel() {
+        try {
+            // Set System L&F
+            UIManager.setLookAndFeel(new com.bulenkov.darcula.DarculaLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            // handle exception
+        }
     }
 
     public static void loadUser() {

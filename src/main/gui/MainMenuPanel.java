@@ -2,14 +2,11 @@ package gui;
 
 import javax.swing.*;
 
+import model.MealType;
 import model.User;
-import org.json.JSONException;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.TimeZone;
-
-import static gui.ProgramFrame.*;
 
 public class MainMenuPanel extends JPanel {
 
@@ -18,34 +15,91 @@ public class MainMenuPanel extends JPanel {
     Integer day;
     JLabel caloriesConsumed;
     JLabel originalCalorieTarget;
+    JLabel remainingCalories;
+    JButton breakfastBtn;
+    JButton lunchBtn;
+    JButton dinnerBtn;
+    JButton snackBtn;
+    JButton waterBtn;
+    JLabel waterCupsLabel;
 
     public MainMenuPanel(ProgramFrame frame) {
         super(null, false);
         day = ProgramFrame.getDay();
         user = ProgramFrame.user;
-        //loadUser();
-        //beginNewDayProtocol(day);
         this.frame = frame;
+        waterCupsLabel = new JLabel();
 
-//        System.out.println("consumed " + user.getCalorieTarget().getCaloriesConsumed());
-//        System.out.println("remaining " + user.getCalorieTarget().getCaloriesRemaining());
-//        System.out.println("original " + user.getCalorieTarget().getOriginalCalorieTarget());
-//        System.out.println("water consumed " + user.getWater().getCupsConsumed());
-//        System.out.println("food size " + user.getFoodSize());
-//        System.out.println("day " + day);
-//        System.out.println("sleep time " + user.getSleep().getSleepTime());
-        addCalorieInformation();
+        printCalorieInformation();
+        foodButtons();
+        waterButtons();
     }
 
-    public void addCalorieInformation() {
-        caloriesConsumed = new JLabel("<html>Consumed<br>" + user.getCalorieTarget().getCaloriesConsumed() + "</html>");
+    public void printCalorieInformation() {
+        caloriesConsumed = new JLabel("<html>Consumed<br><br>" + user.getCalorieTarget().getCaloriesConsumed()
+                + "</html>");
         caloriesConsumed.setBounds(50, 60, 100, 100);
         add(caloriesConsumed);
 
-        originalCalorieTarget = new JLabel("<html>Original<br>Target<br>"
+        originalCalorieTarget = new JLabel("<html>Original<br>Target<br><br>"
                 + user.getCalorieTarget().getOriginalCalorieTarget() + "</html>");
-        originalCalorieTarget.setBounds(300, 40, 100, 100);
+        originalCalorieTarget.setBounds(490, 60, 100, 100);
         add(originalCalorieTarget);
+
+        remainingCalories = new JLabel("<html>Calories<br>Remaining<br><br>"
+                + user.getCalorieTarget().getCaloriesRemaining() + "<html>");
+        remainingCalories.setBounds(270, 40, 100, 100);
+        add(remainingCalories);
+
+    }
+
+    public void foodButtons() {
+        breakfastBtn = new JButton("<html>Breakfast<br>"
+                + user.getAllCaloriesForMealType(MealType.BREAKFAST) + "</html>");
+        add(breakfastBtn);
+        breakfastBtn.setBounds(60, 200, 100, 50);
+
+        lunchBtn = new JButton("<html>Lunch<br>"
+                + user.getAllCaloriesForMealType(MealType.LUNCH) + "</html>");
+        add(lunchBtn);
+        lunchBtn.setBounds(180, 200, 100, 50);
+
+        dinnerBtn = new JButton("<html>Dinner<br>"
+                + user.getAllCaloriesForMealType(MealType.DINNER) + "</html>");
+        add(dinnerBtn);
+        dinnerBtn.setBounds(300, 200, 100, 50);
+
+        snackBtn = new JButton("<html>Snack<br>"
+                + user.getAllCaloriesForMealType(MealType.SNACK) + "</html>");
+        add(snackBtn);
+        snackBtn.setBounds(420, 200, 100, 50);
+    }
+
+    public void waterButtons() {
+        String cupsConsumed = "";
+        for (int i = 0; i < user.getWater().getCupsConsumed(); i++) {
+            cupsConsumed += "1 ";
+        }
+        waterCupsLabel.setText(cupsConsumed);
+        add(waterCupsLabel);
+        waterCupsLabel.setBounds(230, 350, 300, 50);
+
+        waterBtn = new JButton("Drink water");
+        add(waterBtn);
+        waterBtn.setBounds(60, 350, 120, 50);
+        waterBtn.addActionListener(e -> {
+            user.getWater().incrementWater();
+            waterAnimation();
+        });
+    }
+
+    public void waterAnimation() {
+        waterCupsLabel.setText(waterCupsLabel.getText() + "1 ");
+
+        if (user.getWater().getCupsConsumed() >= 8) {
+            waterCupsLabel.setText("");
+            user.getWater().setCupsConsumed(0);
+        }
     }
 
 

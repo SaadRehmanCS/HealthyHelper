@@ -8,16 +8,16 @@ import org.json.JSONObject;
 public class Food implements Writable {
 
     private String foodName;
-    private int totalCalories;
+    private int calories;
     private MealType mealType;
     private String timeOfConsumption;
 
     //MODIFIES: this
     //EFFECTS: sets this to the values given in the parameter
-    public Food(String foodName, int totalCalories, MealType mealType, String timeOfConsumption) {
+    public Food(String foodName, int calories, MealType mealType, String timeOfConsumption) {
 
         this.foodName = foodName;
-        this.totalCalories = totalCalories;
+        this.calories = calories;
         this.mealType = mealType;
         this.timeOfConsumption = timeOfConsumption;
 
@@ -27,8 +27,8 @@ public class Food implements Writable {
         return timeOfConsumption;
     }
 
-    public int getTotalCalories() {
-        return totalCalories;
+    public int getCalories() {
+        return calories;
     }
 
     public MealType getMealType() {
@@ -43,7 +43,7 @@ public class Food implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", foodName);
-        json.put("total calories", totalCalories);
+        json.put("total calories", calories);
         json.put("meal type", mealType);
         json.put("time of consumption", timeOfConsumption);
         return json;

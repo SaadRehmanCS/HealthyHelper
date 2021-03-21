@@ -55,7 +55,7 @@ public class UserTest {
 
         String printIntro = "Food items consumed today: \n   Name            Calories    Meal\n";
         String foodDisplay = "1) " + String.format("%-16s%-12d%-14s%-16s\n",
-                food.getFoodName(), food.getTotalCalories(), food.getMealType(), food.getTimeOfConsumption());
+                food.getFoodName(), food.getCalories(), food.getMealType(), food.getTimeOfConsumption());
 
         assertEquals(user.foodDisplay(), printIntro + foodDisplay + "\n");
     }

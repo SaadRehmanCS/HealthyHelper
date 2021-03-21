@@ -131,10 +131,17 @@ public class NewUserPanel extends JPanel {
         try {
             if (dietPlan.dietPlanRecommendation().equals("cut")) {
                 cutBtn.setBackground(ProgramFrame.buttonBackgroundColor);
+                bulkBtn.setBackground(ProgramFrame.buttonBackgroundColorUnfavourable);
+                maintainBtn.setBackground(ProgramFrame.buttonBackgroundColorUnfavourable);
             } else if (dietPlan.dietPlanRecommendation().equals("bulk")) {
                 bulkBtn.setBackground(ProgramFrame.buttonBackgroundColor);
+                maintainBtn.setBackground(ProgramFrame.buttonBackgroundColorUnfavourable);
+                cutBtn.setBackground(ProgramFrame.buttonBackgroundColorUnfavourable);
+
             } else {
                 maintainBtn.setBackground(ProgramFrame.buttonBackgroundColor);
+                cutBtn.setBackground(ProgramFrame.buttonBackgroundColorUnfavourable);
+                bulkBtn.setBackground(ProgramFrame.buttonBackgroundColorUnfavourable);
             }
         } catch (ImpossibleBodyDimensionsException e) {
             e.printStackTrace();

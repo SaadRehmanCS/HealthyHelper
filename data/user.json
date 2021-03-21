@@ -1,11 +1,11 @@
 {
-    "water consumed": 0,
-    "day of the month": 19,
+    "water consumed": 2,
+    "day of the month": 21,
     "sleep time": 0,
     "calorie target": {
         "calories consumed": 0,
-        "remaining target": 2375,
-        "original target": 2375
+        "remaining target": 2280,
+        "original target": 2280
     },
     "food": []
 }

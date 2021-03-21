@@ -57,8 +57,8 @@ public class CalorieTarget implements Writable {
     //     calories consumed is incremented
     //     accordingly
     public void updateCalorieTarget(Food food) {
-        caloriesRemaining -= food.getTotalCalories();
-        caloriesConsumed += food.getTotalCalories();
+        caloriesRemaining -= food.getCalories();
+        caloriesConsumed += food.getCalories();
     }
 
     public int getCaloriesRemaining() {
