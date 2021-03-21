@@ -5,6 +5,7 @@ import javax.swing.*;
 import model.MealType;
 import model.User;
 
+import java.awt.*;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -78,15 +79,15 @@ public class MainMenuPanel extends JPanel {
     public void waterButtons() {
         String cupsConsumed = "";
         for (int i = 0; i < user.getWater().getCupsConsumed(); i++) {
-            cupsConsumed += "1 ";
+            cupsConsumed += " ";
         }
         waterCupsLabel.setText(cupsConsumed);
         add(waterCupsLabel);
-        waterCupsLabel.setBounds(230, 350, 300, 50);
+        waterCupsLabel.setBounds(195, 320, 350, 80);
 
         waterBtn = new JButton("Drink water");
         add(waterBtn);
-        waterBtn.setBounds(60, 350, 120, 50);
+        waterBtn.setBounds(40, 325, 110, 50);
         waterBtn.addActionListener(e -> {
             user.getWater().incrementWater();
             waterAnimation();
@@ -94,9 +95,9 @@ public class MainMenuPanel extends JPanel {
     }
 
     public void waterAnimation() {
-        waterCupsLabel.setText(waterCupsLabel.getText() + "1 ");
+        waterCupsLabel.setText(waterCupsLabel.getText() + " ");
 
-        if (user.getWater().getCupsConsumed() >= 8) {
+        if (user.getWater().getCupsConsumed() > 8) {
             waterCupsLabel.setText("");
             user.getWater().setCupsConsumed(0);
         }
@@ -130,4 +131,29 @@ public class MainMenuPanel extends JPanel {
         }
     }
 
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        for (int i = 0; i < user.getWater().getCupsConsumed(); i++) {
+
+            g.setColor(Color.BLUE);
+            //water
+            g.fillRect(210 + (i * 45), 323, 20, 39);
+            g.setColor(Color.LIGHT_GRAY);
+            //Left side glass
+            g.fillRect(206 + (i * 45), 320, 4, 42);
+            //Bottom glass
+            g.fillRect(206 + (i * 45), 362, 24, 4);
+            //Right side glass
+            g.fillRect(226 + (i * 45), 320, 4, 42);
+            //bubble1
+            int randYBubble1 = (int)(Math.random() * 35);
+            g.drawOval(213 + (i * 45), 323 + randYBubble1, 5, 5);
+            //bubble2
+            int randYBubble2 = (int)(Math.random() * 35);
+            g.drawOval(216 + (i * 45), 323 + randYBubble2, 5, 5);
+        }
+
+    }
 }

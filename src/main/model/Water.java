@@ -18,7 +18,7 @@ public class Water {
     //EFFECTS: increments the amount consumed as long as it is less
     //      than the daily requirement limit
     public void incrementWater() {
-        if (getCupsConsumed() < DAILY_REQUIREMENT) {
+        if (getCupsConsumed() <= DAILY_REQUIREMENT) {
             cupsConsumed++;
         }
     }
