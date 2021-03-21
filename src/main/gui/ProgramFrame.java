@@ -56,9 +56,9 @@ public class ProgramFrame extends JFrame {
         startPanel = new JPanel();
         startPanel.setLayout(null);
 
-        constructJLabel(startPrompt, "Click start to begin tracking!", 50);
+        constructJLabel(startPrompt, "Click start to begin tracking!", 200, 80);
 
-        constructJButton(1, "Start", 80);
+        constructJButton(1, "Start", 130);
         startBtn.setBackground(buttonBackgroundColor);
         startBtn.setForeground(buttonForegroundColor);
         startBtn.addActionListener(e -> {
@@ -72,15 +72,16 @@ public class ProgramFrame extends JFrame {
 
         });
 
-        constructJLabel(returnPrompt, "Otherwise, click here to continue your journey", 180);
+        if (!jsonFileIsEmpty()) {
+            constructJLabel(returnPrompt, "You have previously saved data. Continue?", 180, 350);
 
-        constructJButton(2, "Continue", 220);
-        returnBtn.setBackground(buttonBackgroundColor);
-        returnBtn.addActionListener(e -> {
-            loadUser();
-            switchStartPanelToMainMenuPanel();
-        });
-
+            constructJButton(2, "Continue", 400);
+            returnBtn.setBackground(buttonBackgroundColor);
+            returnBtn.addActionListener(e -> {
+                loadUser();
+                switchStartPanelToMainMenuPanel();
+            });
+        }
         return startPanel;
     }
 
@@ -89,19 +90,19 @@ public class ProgramFrame extends JFrame {
         if (type == 1) {
             startBtn = new JButton(text);
             startPanel.add(startBtn);
-            startBtn.setBounds(40, height, 100, 80);
+            startBtn.setBounds(240, height, 100, 80);
         } else {
             returnBtn = new JButton(text);
             startPanel.add(returnBtn);
-            returnBtn.setBounds(40, height, 100, 80);
+            returnBtn.setBounds(240, height, 100, 80);
         }
 
     }
 
-    public void constructJLabel(JLabel label, String text, int height) {
+    public void constructJLabel(JLabel label, String text, int x, int y) {
         label = new JLabel(text);
         startPanel.add(label);
-        label.setBounds(40, height, 700, 20);
+        label.setBounds(x, y, 700, 20);
     }
 
     public void switchPanelFromStartPanel(JPanel oldPanel, JPanel newPanel) {
@@ -186,6 +187,17 @@ public class ProgramFrame extends JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             // handle exception
         }
+    }
+
+    public boolean jsonFileIsEmpty() {
+        try {
+            jsonReader.read();
+        } catch (IOException e) {
+            //
+        } catch (JSONException e) {
+            return true;
+        }
+        return false;
     }
 
     public static void loadUser() {

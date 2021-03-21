@@ -1,11 +1,84 @@
 {
-    "water consumed": 1,
+    "water consumed": 3,
     "day of the month": 21,
     "sleep time": 0,
     "calorie target": {
-        "calories consumed": 0,
-        "remaining target": 2280,
-        "original target": 2280
+        "calories consumed": 660,
+        "remaining target": 3045,
+        "original target": 3705
     },
-    "food": []
+    "food": [
+        {
+            "name": "fried rice",
+            "time of consumption": "10:15 PM  Sun, Mar 21",
+            "meal type": "BREAKFAST",
+            "total calories": 450
+        },
+        {
+            "name": "pineapple",
+            "time of consumption": "10:16 PM  Sun, Mar 21",
+            "meal type": "LUNCH",
+            "total calories": 30
+        },
+        {
+            "name": "pudding",
+            "time of consumption": "10:16 PM  Sun, Mar 21",
+            "meal type": "LUNCH",
+            "total calories": 100
+        },
+        {
+            "name": "ded",
+            "time of consumption": "10:16 PM  Sun, Mar 21",
+            "meal type": "LUNCH",
+            "total calories": 0
+        },
+        {
+            "name": "3",
+            "time of consumption": "10:17 PM  Sun, Mar 21",
+            "meal type": "LUNCH",
+            "total calories": 0
+        },
+        {
+            "name": "er",
+            "time of consumption": "10:17 PM  Sun, Mar 21",
+            "meal type": "LUNCH",
+            "total calories": 34
+        },
+        {
+            "name": "3ww",
+            "time of consumption": "10:18 PM  Sun, Mar 21",
+            "meal type": "DINNER",
+            "total calories": 0
+        },
+        {
+            "name": "de",
+            "time of consumption": "10:19 PM  Sun, Mar 21",
+            "meal type": "LUNCH",
+            "total calories": 0
+        },
+        {
+            "name": "de",
+            "time of consumption": "10:19 PM  Sun, Mar 21",
+            "meal type": "DINNER",
+            "total calories": 23
+        },
+        {
+            "name": "e3",
+            "time of consumption": "10:19 PM  Sun, Mar 21",
+            "meal type": "LUNCH",
+            "total calories": 0
+        },
+        {
+            "name": "de",
+            "time of consumption": "10:19 PM  Sun, Mar 21",
+            "meal type": "LUNCH",
+            "total calories": 23
+        },
+        {
+            "name": "de",
+            "time of consumption": "10:19 PM  Sun, Mar 21",
+            "meal type": "LUNCH",
+            "total calories": 0
+        }
+    ]
 }
