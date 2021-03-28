@@ -164,11 +164,11 @@ public class MainMenuPanel extends JPanel {
     }
 
     public void setFoodEntryVisibility(boolean state) {
-        foodNameText.setVisible(false);
-        foodNameLabel.setVisible(false);
-        foodCaloriesText.setVisible(false);
-        foodCaloriesLabel.setVisible(false);
-        foodSubmitBtn.setVisible(false);
+        foodNameText.setVisible(state);
+        foodNameLabel.setVisible(state);
+        foodCaloriesText.setVisible(state);
+        foodCaloriesLabel.setVisible(state);
+        foodSubmitBtn.setVisible(state);
     }
 
     public void setAllFoodButtonsVisibility(boolean state) {
@@ -210,8 +210,12 @@ public class MainMenuPanel extends JPanel {
         add(printHistory);
         printHistory.setBounds(200, 450, 200, 50);
         printHistory.addActionListener(e -> {
-            //TODO
+            displayFoodHistoryFrame();
         });
+    }
+
+    private void displayFoodHistoryFrame() {
+        frame.switchMainMenuToFoodHistoryPanel();
     }
 
 

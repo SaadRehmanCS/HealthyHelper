@@ -6,10 +6,8 @@ import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
@@ -33,6 +31,7 @@ public class ProgramFrame extends JFrame {
     NewUserPanel newUserPanel;
     MainMenuPanel mainMenuPanel;
     static User user;
+    private JPanel foodHistoryPanel;
 
 
     public ProgramFrame() {
@@ -45,6 +44,7 @@ public class ProgramFrame extends JFrame {
         jsonReader = new JsonReader(JSON_STORE);
         user = new User();
         newUserPanel = new NewUserPanel(this);
+        foodHistoryPanel = new FoodHistoryPanel(this);
 
         add(createStartPanel());
         setVisible(true);
@@ -127,6 +127,20 @@ public class ProgramFrame extends JFrame {
     public void switchNewUserToMainMenuPanel() {
         mainMenuPanel = new MainMenuPanel(this);
         remove(newUserPanel);
+        add(mainMenuPanel);
+        setVisible(true);
+    }
+
+    public void switchMainMenuToFoodHistoryPanel() {
+        remove(mainMenuPanel);
+        foodHistoryPanel = new FoodHistoryPanel(this);
+        add(foodHistoryPanel);
+        setVisible(true);
+    }
+
+    public void switchFoodHistoryToMainMenuPanel() {
+        remove(foodHistoryPanel);
+        mainMenuPanel = new MainMenuPanel(this);
         add(mainMenuPanel);
         setVisible(true);
     }
