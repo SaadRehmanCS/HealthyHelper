@@ -3,8 +3,8 @@
     "day of the month": 0,
     "sleep time": 5,
     "calorie target": {
-        "calories consumed": 0,
-        "remaining target": 0,
+        "calories consumed": 200,
+        "remaining target": -200,
         "original target": 0
     },
     "food": [{
