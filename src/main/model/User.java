@@ -100,6 +100,7 @@ public class User implements Writable {
         }
     }
 
+    //EFFECTS: return the total calories of a certain meal type
     public int getAllCaloriesForMealType(MealType mealType) {
         int calories = 0;
         for (Food food: foodLog) {

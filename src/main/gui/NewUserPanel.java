@@ -6,6 +6,7 @@ import model.exceptions.ImpossibleBodyDimensionsException;
 
 import javax.swing.*;
 
+//class will run when a new user starts the program
 public class NewUserPanel extends JPanel {
 
     JLabel welcomeMsg;
@@ -24,6 +25,8 @@ public class NewUserPanel extends JPanel {
     User user;
 
 
+    //MODIFIES: this
+    //EFFECTS: creates a new panel
     public NewUserPanel(ProgramFrame frame) {
         super(null, false);
         this.frame = frame;
@@ -32,6 +35,8 @@ public class NewUserPanel extends JPanel {
         promptUserInformation();
     }
 
+    //MODIFIES: this
+    //EFFECTS: will ask user for weight and height
     private void promptUserInformation() {
         welcomeMsg = new JLabel("<html><body><b>Welcome to HealthyHelper!</b> the application "
                 + " that can help you keep your fitness<br> goals on track! "
@@ -61,6 +66,9 @@ public class NewUserPanel extends JPanel {
         handleUserInput();
     }
 
+    //REQUIRES: user enters height and weight prior
+    //MODIFIES: this
+    //EFFECTS: will calculate BMI based on user input
     public void handleUserInput() {
         enterButton = new JButton("Calculate");
         add(enterButton);
@@ -88,6 +96,7 @@ public class NewUserPanel extends JPanel {
 
     }
 
+    //EFFECTS: picks a recommended BMI plan
     private void bmiPlanPicker() {
         add(bmiInfo);
         dietPlan.setDietPlanUserSelection(2);
@@ -102,6 +111,8 @@ public class NewUserPanel extends JPanel {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: deals with the user picking their diet plan
     public void handlePlanButtonClick() {
         cutBtn = new JButton("Cut");
         add(cutBtn);
@@ -125,6 +136,8 @@ public class NewUserPanel extends JPanel {
         setRecommendedButtonColor();
     }
 
+    //MODIFIES: this
+    //EFFECTS: helper method for maintain button
     public void helperToSetMaintain() {
         maintainBtn = new JButton("Maintain");
         add(maintainBtn);
@@ -136,6 +149,8 @@ public class NewUserPanel extends JPanel {
         });
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets color on button for recommended choice
     private void setRecommendedButtonColor() {
         try {
             if (dietPlan.dietPlanRecommendation().equals("cut")) {

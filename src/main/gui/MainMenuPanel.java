@@ -7,9 +7,7 @@ import model.MealType;
 import model.User;
 import java.awt.*;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 //class is used as a JPanel for the main menu
 public class MainMenuPanel extends JPanel {
@@ -142,8 +140,8 @@ public class MainMenuPanel extends JPanel {
 
     }
 
-    //MODIFIES:
-    //EFFECTS:
+    //MODIFIES: this
+    //EFFECTS: when the user submits their food entry, this method converts it into a new Food object
     private void enterFoodAndRestartPrompt(MealType mealType) {
         String foodName = "";
         int foodCalories = 0;
@@ -169,6 +167,8 @@ public class MainMenuPanel extends JPanel {
         foodButtons();
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the buttons to be visible
     public void setFoodButtonVisibility(boolean state) {
         breakfastBtn.setVisible(state);
         lunchBtn.setVisible(state);
@@ -176,6 +176,8 @@ public class MainMenuPanel extends JPanel {
         snackBtn.setVisible(state);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the buttons to be visible
     public void setFoodEntryVisibility(boolean state) {
         foodNameText.setVisible(state);
         foodNameLabel.setVisible(state);
@@ -184,6 +186,8 @@ public class MainMenuPanel extends JPanel {
         foodSubmitBtn.setVisible(state);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the buttons to be visible
     public void setAllFoodButtonsVisibility(boolean state) {
         breakfastBtn.setVisible(state);
         lunchBtn.setVisible(state);
@@ -191,6 +195,8 @@ public class MainMenuPanel extends JPanel {
         snackBtn.setVisible(state);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds the button to drink water
     public void waterButtons() {
         String cupsConsumed = "";
         for (int i = 0; i < user.getWater().getCupsConsumed(); i++) {
@@ -210,6 +216,8 @@ public class MainMenuPanel extends JPanel {
         });
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the text label for the water glass drawings
     public void waterAnimation() {
         waterCupsLabel.setText(waterCupsLabel.getText() + " ");
 
@@ -219,6 +227,8 @@ public class MainMenuPanel extends JPanel {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: prints the food history button
     public void showFoodHistory() {
         printHistory = new JButton("Show my history");
         add(printHistory);
@@ -229,6 +239,7 @@ public class MainMenuPanel extends JPanel {
         });
     }
 
+    //EFFECTS: switches panels to show food logging history
     private void displayFoodHistoryFrame() {
         frame.switchMainMenuToFoodHistoryPanel();
     }
@@ -238,29 +249,31 @@ public class MainMenuPanel extends JPanel {
         return user;
     }
 
-    public void beginNewDayProtocol(int declaredDay) {
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-        int currentDay = calendar.get(Calendar.DATE);
+//    public void beginNewDayProtocol(int declaredDay) {
+//        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+//        int currentDay = calendar.get(Calendar.DATE);
+//
+//        int currentTime = calendar.get(Calendar.HOUR_OF_DAY);
+//        String typeOfTime;
+//        if (currentTime < 11) {
+//            typeOfTime = "morning";
+//        } else if (currentTime < 16) {
+//            typeOfTime = "afternoon";
+//        } else if (currentTime < 20) {
+//            typeOfTime = "evening";
+//        } else {
+//            typeOfTime = "night";
+//        }
+//        if (currentDay != declaredDay) {
+//            user.setAllFieldsToZero();
+//            day = currentDay;
+//            System.out.println("Good " + typeOfTime + "! Good job on your progress yesterday,\n"
+//                    + "lets start tracking information for today:");
+//        }
+//    }
 
-        int currentTime = calendar.get(Calendar.HOUR_OF_DAY);
-        String typeOfTime;
-        if (currentTime < 11) {
-            typeOfTime = "morning";
-        } else if (currentTime < 16) {
-            typeOfTime = "afternoon";
-        } else if (currentTime < 20) {
-            typeOfTime = "evening";
-        } else {
-            typeOfTime = "night";
-        }
-        if (currentDay != declaredDay) {
-            user.setAllFieldsToZero();
-            day = currentDay;
-            System.out.println("Good " + typeOfTime + "! Good job on your progress yesterday,\n"
-                    + "lets start tracking information for today:");
-        }
-    }
 
+    //EFFECTS: draws the water cup animations
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

@@ -1,24 +1,11 @@
 {
-    "water consumed": 1,
+    "water consumed": 2,
     "day of the month": 29,
     "sleep time": 0,
     "calorie target": {
-        "calories consumed": 372,
-        "remaining target": 1908,
+        "calories consumed": 0,
+        "remaining target": 2280,
         "original target": 2280
     },
-    "food": [
-        {
-            "name": "pie",
-            "time of consumption": "4:47 AM  Mon, Mar 29",
-            "meal type": "BREAKFAST",
-            "total calories": 349
-        },
-        {
-            "name": "de",
-            "time of consumption": "4:47 AM  Mon, Mar 29",
-            "meal type": "LUNCH",
-            "total calories": 23
-        }
-    ]
+    "food": []
 }
