@@ -1,7 +1,6 @@
 package model;
 
 import model.exceptions.ImpossibleBodyDimensionsException;
-import model.exceptions.InvalidDietPlanException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

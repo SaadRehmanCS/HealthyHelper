@@ -1,7 +1,6 @@
 package model;
 
 import model.exceptions.ImpossibleBodyDimensionsException;
-import model.exceptions.InvalidDietPlanException;
 
 //this class is used to provide personalized information
 //to the user, having been provided their current body type, and

@@ -74,7 +74,8 @@ public class UserTest {
         user.setAllFieldsToZero();
         assertEquals(0, user.getWater().getCupsConsumed());
         assertEquals(0, user.getFoodSize());
-        assertEquals(user.getCalorieTarget().getOriginalCalorieTarget(), user.getCalorieTarget().getCaloriesRemaining());
+        assertEquals(user.getCalorieTarget().getOriginalCalorieTarget(),
+                user.getCalorieTarget().getCaloriesRemaining());
         assertEquals(0, user.getCalorieTarget().getCaloriesConsumed());
         assertEquals(0, user.getSleep().getSleepTime());
     }

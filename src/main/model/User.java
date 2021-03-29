@@ -163,24 +163,4 @@ public class User implements Writable {
         sleep.addSleepTime(-sleep.getSleepTime());
     }
 
-//scaffolding
-    //private JSONObject userToJson() {
-    //         JSONObject json = new JSONObject();
-    //      for (User user: Users) {
-    //        json.put("food", foodLogToJson());
-    //        json.put("water consumed", waterLog.getAmountConsumed());
-    //        json.put("sleep time", getSleepTime());
-    //      }
-    //  return json
-    // }
-
-    //scaffolding
-    //@Override
-    //    public JSONObject toJson() {
-    //        JSONObject json = new JSONObject();
-    //        json.put("user", user.userToJson());
-    //        return json;
-    //
-    //    }
-
 }
