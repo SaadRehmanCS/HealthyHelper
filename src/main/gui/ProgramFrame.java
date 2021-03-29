@@ -6,8 +6,10 @@ import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
@@ -62,14 +64,9 @@ public class ProgramFrame extends JFrame {
         startBtn.setBackground(buttonBackgroundColor);
         startBtn.setForeground(buttonForegroundColor);
         startBtn.addActionListener(e -> {
-            //user = new User();
-            //user.setAllFieldsToZero();
-//            clearUserData();
-//           MainMenuPanel.loadUser();
+            playSound("data/button_click.wav");
             day = CALENDER.get(Calendar.DATE);
             switchStartPanelToNewUserPanel();
-            //mainMenuPanel = new MainMenuPanel(this);
-
         });
 
         if (!jsonFileIsEmpty()) {
@@ -78,6 +75,7 @@ public class ProgramFrame extends JFrame {
             constructJButton(2, "Continue", 400);
             returnBtn.setBackground(buttonBackgroundColor);
             returnBtn.addActionListener(e -> {
+                playSound("data/button_click.wav");
                 loadUser();
                 switchStartPanelToMainMenuPanel();
             });
@@ -226,6 +224,18 @@ public class ProgramFrame extends JFrame {
         }
     }
 
+    public static void playSound(String soundFile) {
+        File f = new File("./" + soundFile);
+        AudioInputStream audioIn = null;
+        try {
+            audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static Integer getDay() {
         return day;

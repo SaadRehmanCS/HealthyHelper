@@ -29,13 +29,17 @@ public class FoodHistoryPanel extends JPanel {
     public void buttonForBackToMainMenu() {
         add(btn);
         btn.setBounds(10, 20, 100, 50);
-        btn.addActionListener(e -> frame.switchFoodHistoryToMainMenuPanel());
+        btn.addActionListener(e -> {
+            frame.switchFoodHistoryToMainMenuPanel();
+            ProgramFrame.playSound("data/button_click.wav");
+        });
+
     }
 
     public void printHistoryTextPane() {
         String text = "<div style=\"font-size:13;\">";
         for (Food food : user.getFoodLog()) {
-            text += "<br>" + food.getFoodName() + "`````" + food.getCalories() + "`````" + food.getMealType() + "`````"
+            text += "<br>" + food.getFoodName() + "` ` `" + food.getCalories() + "` ` `" + food.getMealType() + "` ` `"
                     + food.getTimeOfConsumption() + "<br>";
         }
         text += "</div>";

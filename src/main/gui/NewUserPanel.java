@@ -28,6 +28,7 @@ public class NewUserPanel extends JPanel {
         super(null, false);
         this.frame = frame;
         user = ProgramFrame.user;
+
         promptUserInformation();
     }
 
@@ -66,6 +67,7 @@ public class NewUserPanel extends JPanel {
         enterButton.setBounds(40, 210, 100, 60);
         enterButton.addActionListener(e -> {
             try {
+                ProgramFrame.playSound("data/button_click.wav");
                 double height = Double.parseDouble(heightText.getText());
                 double weight = Double.parseDouble(weightText.getText());
                 dietPlan = new DietPlan(height, weight);
@@ -105,6 +107,7 @@ public class NewUserPanel extends JPanel {
         add(cutBtn);
         cutBtn.setBounds(80, 390, 80, 50);
         cutBtn.addActionListener(e -> {
+            ProgramFrame.playSound("data/button_click.wav");
             dietPlan.setDietPlanUserSelection(2);
             frame.switchNewUserToMainMenuPanel();
         });
@@ -113,18 +116,24 @@ public class NewUserPanel extends JPanel {
         add(bulkBtn);
         bulkBtn.setBounds(170, 390, 80, 50);
         bulkBtn.addActionListener(e -> {
+            ProgramFrame.playSound("data/button_click.wav");
             dietPlan.setDietPlanUserSelection(1);
             frame.switchNewUserToMainMenuPanel();
         });
+        helperToSetMaintain();
 
+        setRecommendedButtonColor();
+    }
+
+    public void helperToSetMaintain() {
         maintainBtn = new JButton("Maintain");
         add(maintainBtn);
         maintainBtn.setBounds(260, 390, 100, 50);
         maintainBtn.addActionListener(e -> {
+            ProgramFrame.playSound("data/button_click.wav");
             dietPlan.setDietPlanUserSelection(3);
             frame.switchNewUserToMainMenuPanel();
         });
-        setRecommendedButtonColor();
     }
 
     private void setRecommendedButtonColor() {

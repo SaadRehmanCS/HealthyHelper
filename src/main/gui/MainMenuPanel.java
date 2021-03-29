@@ -5,7 +5,6 @@ import javax.swing.*;
 import model.Food;
 import model.MealType;
 import model.User;
-
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,6 +32,7 @@ public class MainMenuPanel extends JPanel {
     JTextField foodCaloriesText;
     JButton foodSubmitBtn;
     JLabel exceptionMsg;
+    // AudioClip click;
 
     public MainMenuPanel(ProgramFrame frame) {
         super(null, false);
@@ -40,6 +40,8 @@ public class MainMenuPanel extends JPanel {
         user = ProgramFrame.user;
         this.frame = frame;
         waterCupsLabel = new JLabel();
+//        URL urlClick = MainMenuPanel.class.getResource("button_click.wav");
+//        click = Applet.newAudioClip(urlClick);
 
         printCalorieInformation();
         foodButtons();
@@ -123,7 +125,10 @@ public class MainMenuPanel extends JPanel {
         foodSubmitBtn = new JButton("Submit");
         add(foodSubmitBtn);
         foodSubmitBtn.setBounds(240, 240, 100, 50);
-        foodSubmitBtn.addActionListener(e -> enterFoodAndRestartPrompt(mealType));
+        foodSubmitBtn.addActionListener(e -> {
+            ProgramFrame.playSound("data/button_click.wav");
+            enterFoodAndRestartPrompt(mealType);
+        });
 
         exceptionMsg = new JLabel("");
         add(exceptionMsg);
@@ -191,6 +196,7 @@ public class MainMenuPanel extends JPanel {
         add(waterBtn);
         waterBtn.setBounds(40, 325, 110, 50);
         waterBtn.addActionListener(e -> {
+            ProgramFrame.playSound("data/button_click.wav");
             user.getWater().incrementWater();
             waterAnimation();
         });
@@ -210,6 +216,7 @@ public class MainMenuPanel extends JPanel {
         add(printHistory);
         printHistory.setBounds(200, 450, 200, 50);
         printHistory.addActionListener(e -> {
+            ProgramFrame.playSound("data/button_click.wav");
             displayFoodHistoryFrame();
         });
     }
