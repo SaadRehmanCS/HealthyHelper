@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+//class is used as a JPanel for the main menu
 public class MainMenuPanel extends JPanel {
 
     ProgramFrame frame;
@@ -32,16 +33,15 @@ public class MainMenuPanel extends JPanel {
     JTextField foodCaloriesText;
     JButton foodSubmitBtn;
     JLabel exceptionMsg;
-    // AudioClip click;
 
+    //MODIFIES: this
+    //EFFECTS: creates a new panel
     public MainMenuPanel(ProgramFrame frame) {
         super(null, false);
         day = ProgramFrame.getDay();
         user = ProgramFrame.user;
         this.frame = frame;
         waterCupsLabel = new JLabel();
-//        URL urlClick = MainMenuPanel.class.getResource("button_click.wav");
-//        click = Applet.newAudioClip(urlClick);
 
         printCalorieInformation();
         foodButtons();
@@ -49,6 +49,8 @@ public class MainMenuPanel extends JPanel {
         showFoodHistory();
     }
 
+    //MODIFIES: this
+    //EFFECTS: prints the labels that show calorie information to user
     public void printCalorieInformation() {
         if (caloriesConsumed != null) {
             caloriesConsumed.setVisible(false);
@@ -72,6 +74,8 @@ public class MainMenuPanel extends JPanel {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: prints out the individual food type information as buttons
     public void foodButtons() {
         if (breakfastBtn != null) {
             setFoodButtonVisibility(false);
@@ -104,6 +108,8 @@ public class MainMenuPanel extends JPanel {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: when user adds food, this component appears, to retrieve the information
     private void promptFoodFromUser(MealType mealType) {
         setAllFoodButtonsVisibility(false);
         foodNameLabel = new JLabel("Food: ");
@@ -136,6 +142,8 @@ public class MainMenuPanel extends JPanel {
 
     }
 
+    //MODIFIES:
+    //EFFECTS:
     private void enterFoodAndRestartPrompt(MealType mealType) {
         String foodName = "";
         int foodCalories = 0;
