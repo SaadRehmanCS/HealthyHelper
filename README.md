@@ -36,3 +36,7 @@ information to file.
  - As a user, I want to reset all my information daily so that I can keep track 
  of only information for one day at a time.
  
+ ##### Phase 4: Task 2
+ * I have designed a robust class DietPlan, that throws ImpossibleBodyDimensionsException
+ The DietPlan constructor, and calculateBMI throw the exception. bmiAssessment and dietPlanRecommendation 
+ do not throw it, but they have included it in their method signatures.
