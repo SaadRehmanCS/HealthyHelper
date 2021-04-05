@@ -40,3 +40,10 @@ information to file.
  * I have designed a robust class DietPlan, that throws ImpossibleBodyDimensionsException
  The DietPlan constructor, and calculateBMI throw the exception. bmiAssessment and dietPlanRecommendation 
  do not throw it, but they have included it in their method signatures.
+
+ ##### Phase 4: Task 3
+ ###### If I had more time to work on the project:
+ * I would refactor the gui package to not be so dependent on the User class.
+ * I would implement a Map interface to store different Users so that the program
+ can allow anyone to load in their saved data even if someone else has used the program after them.
+ * I would try to reduce coupling between gui classes.
