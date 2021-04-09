@@ -1,7 +1,6 @@
 package model;
 
 import model.exceptions.ImpossibleBodyDimensionsException;
-import model.exceptions.InvalidDietPlanException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,14 +30,14 @@ class DietPlanTest {
             planOver = new DietPlan(5, 20);
             fail();
         } catch (ImpossibleBodyDimensionsException e) {
-            //stub
+            //expected
         }
 
         try {
             planUnder = new DietPlan(300, 50);
             fail();
         } catch (ImpossibleBodyDimensionsException e) {
-            //stub
+            //expected
         }
     }
 
@@ -48,14 +47,14 @@ class DietPlanTest {
             planOver = new DietPlan(20, 5);
             fail();
         } catch (ImpossibleBodyDimensionsException e) {
-            //stub
+            //expected
         }
 
         try {
             planUnder = new DietPlan(30, 300);
             fail();
         } catch (ImpossibleBodyDimensionsException e) {
-            //stub
+            //expected
         }
     }
 
@@ -80,7 +79,7 @@ class DietPlanTest {
             planException.calculateBMI();
             fail();
         } catch (ImpossibleBodyDimensionsException e) {
-            //stub
+            //expected
         }
     }
 
@@ -96,7 +95,7 @@ class DietPlanTest {
             planException.calculateBMI();
             fail();
         } catch (ImpossibleBodyDimensionsException e) {
-            //stub
+            //expected
         }
     }
 

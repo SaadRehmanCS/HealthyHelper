@@ -4,7 +4,6 @@ import model.DietPlan;
 import model.Food;
 import model.User;
 import model.exceptions.ImpossibleBodyDimensionsException;
-import model.exceptions.InvalidDietPlanException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import org.json.JSONException;

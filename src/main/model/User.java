@@ -100,6 +100,7 @@ public class User implements Writable {
         }
     }
 
+    //EFFECTS: return the total calories of a certain meal type
     public int getAllCaloriesForMealType(MealType mealType) {
         int calories = 0;
         for (Food food: foodLog) {
@@ -162,25 +163,5 @@ public class User implements Writable {
         calorieTarget.setCaloriesConsumed(0);
         sleep.addSleepTime(-sleep.getSleepTime());
     }
-
-//scaffolding
-    //private JSONObject userToJson() {
-    //         JSONObject json = new JSONObject();
-    //      for (User user: Users) {
-    //        json.put("food", foodLogToJson());
-    //        json.put("water consumed", waterLog.getAmountConsumed());
-    //        json.put("sleep time", getSleepTime());
-    //      }
-    //  return json
-    // }
-
-    //scaffolding
-    //@Override
-    //    public JSONObject toJson() {
-    //        JSONObject json = new JSONObject();
-    //        json.put("user", user.userToJson());
-    //        return json;
-    //
-    //    }
 
 }

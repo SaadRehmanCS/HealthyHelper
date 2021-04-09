@@ -37,6 +37,7 @@ public class SleepTest {
     @Test
     public void testSleepTimeExcess() {
         sleep.addSleepTime(10);
-        assertEquals("You slept longer than necessary. This is great, but be more resourceful with time!", sleep.sleepAssessment());
+        assertEquals("You slept longer than necessary. This is great, "
+                + "but be more resourceful with time!", sleep.sleepAssessment());
     }
 }

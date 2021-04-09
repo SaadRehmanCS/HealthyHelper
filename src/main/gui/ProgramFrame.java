@@ -6,13 +6,16 @@ import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+//this class is the frame behind which all the panels will go
 public class ProgramFrame extends JFrame {
 
     public static final String JSON_STORE = "./data/user.json";
@@ -34,6 +37,8 @@ public class ProgramFrame extends JFrame {
     private JPanel foodHistoryPanel;
 
 
+    //MODIFIES: this
+    //EFFECTS: creates a new frame, sets default settings, and adds new panel
     public ProgramFrame() {
         super("Healthy Helper");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -52,6 +57,8 @@ public class ProgramFrame extends JFrame {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: creates a new start panel
     public JPanel createStartPanel() {
         startPanel = new JPanel();
         startPanel.setLayout(null);
@@ -62,14 +69,9 @@ public class ProgramFrame extends JFrame {
         startBtn.setBackground(buttonBackgroundColor);
         startBtn.setForeground(buttonForegroundColor);
         startBtn.addActionListener(e -> {
-            //user = new User();
-            //user.setAllFieldsToZero();
-//            clearUserData();
-//           MainMenuPanel.loadUser();
+            playSound("data/button_click.wav");
             day = CALENDER.get(Calendar.DATE);
             switchStartPanelToNewUserPanel();
-            //mainMenuPanel = new MainMenuPanel(this);
-
         });
 
         if (!jsonFileIsEmpty()) {
@@ -78,6 +80,7 @@ public class ProgramFrame extends JFrame {
             constructJButton(2, "Continue", 400);
             returnBtn.setBackground(buttonBackgroundColor);
             returnBtn.addActionListener(e -> {
+                playSound("data/button_click.wav");
                 loadUser();
                 switchStartPanelToMainMenuPanel();
             });
@@ -85,6 +88,8 @@ public class ProgramFrame extends JFrame {
         return startPanel;
     }
 
+    //MODIFIES: this
+    //EFFECTS: creates the buttons for start or continue program
     public void constructJButton(int type, String text, int height) {
 
         if (type == 1) {
@@ -99,24 +104,29 @@ public class ProgramFrame extends JFrame {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: creates new labels
     public void constructJLabel(JLabel label, String text, int x, int y) {
         label = new JLabel(text);
         startPanel.add(label);
         label.setBounds(x, y, 700, 20);
     }
 
+    //EFFECTS: switch panels from the frame
     public void switchPanelFromStartPanel(JPanel oldPanel, JPanel newPanel) {
         remove(oldPanel);
         add(newPanel);
         setVisible(true);
     }
 
+    //EFFECTS: switch panels from the frame
     public void switchStartPanelToNewUserPanel() {
         remove(startPanel);
         add(newUserPanel);
         setVisible(true);
     }
 
+    //EFFECTS: switch panels from the frame
     public void switchStartPanelToMainMenuPanel() {
         mainMenuPanel = new MainMenuPanel(this);
         remove(startPanel);
@@ -124,6 +134,7 @@ public class ProgramFrame extends JFrame {
         setVisible(true);
     }
 
+    //EFFECTS: switch panels from the frame
     public void switchNewUserToMainMenuPanel() {
         mainMenuPanel = new MainMenuPanel(this);
         remove(newUserPanel);
@@ -131,6 +142,7 @@ public class ProgramFrame extends JFrame {
         setVisible(true);
     }
 
+    //EFFECTS: switch panels from the frame
     public void switchMainMenuToFoodHistoryPanel() {
         remove(mainMenuPanel);
         foodHistoryPanel = new FoodHistoryPanel(this);
@@ -138,6 +150,7 @@ public class ProgramFrame extends JFrame {
         setVisible(true);
     }
 
+    //EFFECTS: switch panels from the frame
     public void switchFoodHistoryToMainMenuPanel() {
         remove(foodHistoryPanel);
         mainMenuPanel = new MainMenuPanel(this);
@@ -145,12 +158,15 @@ public class ProgramFrame extends JFrame {
         setVisible(true);
     }
 
+    //EFFECTS: switch panels from the frame
     public void switchMainMenuToNewUserPanel() {
         remove(mainMenuPanel);
         add(newUserPanel);
         setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECTS: clears all user data
     private void clearUserData() {
         try {
             jsonWriter.open();
@@ -160,13 +176,8 @@ public class ProgramFrame extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        setLookAndFeel();
-        new ProgramFrame();
-        saveDataOnClose();
-
-    }
-
+    //MODIFIES: this
+    //EFFECTS: when the app is closed, it will save user data to file
     public static void saveDataOnClose() {
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
@@ -194,6 +205,7 @@ public class ProgramFrame extends JFrame {
         }, "Shutdown-thread"));
     }
 
+    //EFFECTS: sets the look and feel for Java swing
     public static void setLookAndFeel() {
         try {
             // Set System L&F
@@ -203,6 +215,7 @@ public class ProgramFrame extends JFrame {
         }
     }
 
+    //EFFECTS: checks to see if the file is empty
     public boolean jsonFileIsEmpty() {
         try {
             jsonReader.read();
@@ -214,6 +227,8 @@ public class ProgramFrame extends JFrame {
         return false;
     }
 
+    //MODIFIES: this
+    //EFFECTS: loads in the old user
     public static void loadUser() {
         try {
             user = jsonReader.read();
@@ -226,6 +241,19 @@ public class ProgramFrame extends JFrame {
         }
     }
 
+    //EFFECTS: plays a sound from a given sound file
+    public static void playSound(String soundFile) {
+        File f = new File("./" + soundFile);
+        AudioInputStream audioIn = null;
+        try {
+            audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static Integer getDay() {
         return day;

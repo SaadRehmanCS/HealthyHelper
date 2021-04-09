@@ -74,8 +74,21 @@ public class UserTest {
         user.setAllFieldsToZero();
         assertEquals(0, user.getWater().getCupsConsumed());
         assertEquals(0, user.getFoodSize());
-        assertEquals(user.getCalorieTarget().getOriginalCalorieTarget(), user.getCalorieTarget().getCaloriesRemaining());
+        assertEquals(user.getCalorieTarget().getOriginalCalorieTarget(),
+                user.getCalorieTarget().getCaloriesRemaining());
         assertEquals(0, user.getCalorieTarget().getCaloriesConsumed());
         assertEquals(0, user.getSleep().getSleepTime());
+    }
+
+    @Test
+    public void testGetCaloriesForMealNone() {
+        user.addFood(new Food("", 231, MealType.BREAKFAST, ""));
+        assertEquals(0, user.getAllCaloriesForMealType(MealType.LUNCH));
+    }
+
+    @Test
+    public void testGetCaloriesForMeal() {
+        user.addFood(new Food("", 231, MealType.BREAKFAST, ""));
+        assertEquals(231, user.getAllCaloriesForMealType(MealType.BREAKFAST));
     }
 }
